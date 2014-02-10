@@ -24,7 +24,7 @@ THE SOFTWARE.
 
 """
 from os.path import join, normpath
-from base import *
+from cuble.settings.base import *
 
 
 ########## DEBUG CONFIGURATION

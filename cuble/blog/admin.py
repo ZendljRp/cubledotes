@@ -23,15 +23,27 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
 """
-from django.conf.urls import patterns, include, url
+from django.forms import ModelForm, TextInput
 from django.contrib import admin
-from web.views import LandingView
 
-admin.autodiscover()
+from suit_redactor.widgets import RedactorWidget
 
-urlpatterns = patterns(
-    '',
-    url(r'^$', LandingView.as_view(), name="landing"),
-    # url(r'^blog/', include('blog.urls')),
-    url(r'^admin/', include(admin.site.urls)),
-)
+from blog.models import Post
+
+
+class PostForm(ModelForm):
+    class Meta:
+        widgets = {
+            'title': TextInput(),
+            'content': RedactorWidget()
+        }
+
+
+class PostAdmin(admin.ModelAdmin):
+    form = PostForm
+    fieldsets = [
+      (None, {'fields': ('title',)}),
+      ('Content', {'classes': ('full-width',), 'fields': ('content',)})
+    ]
+
+admin.site.register(Post, PostAdmin)

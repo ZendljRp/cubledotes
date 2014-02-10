@@ -149,7 +149,7 @@ STATICFILES_FINDERS = (
 ########## SECRET CONFIGURATION
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#secret-key
 # Note: This key only used for development and testing.
-SECRET_KEY = r"os0)3ulji!%o(0to_9-+f0fhn-ec+!pj*-zt+2$_)q%%5)z94_"
+SECRET_KEY = '!b@!_^($0_m$t8nzrb^clf9nf6_31gqt+g8voyfogs&ye#vt=i'
 ########## END SECRET CONFIGURATION
 
 ########## FIXTURE CONFIGURATION
@@ -170,8 +170,6 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.core.context_processors.tz',
     'django.contrib.messages.context_processors.messages',
     'django.core.context_processors.request',
-    'cms.context_processors.media',
-    'sekizai.context_processors.sekizai',
 )
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#template-loaders
@@ -198,10 +196,6 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.locale.LocaleMiddleware',
     'django.middleware.doc.XViewMiddleware',
     'django.middleware.common.CommonMiddleware',
-    'cms.middleware.page.CurrentPageMiddleware',
-    'cms.middleware.user.CurrentUserMiddleware',
-    'cms.middleware.toolbar.ToolbarMiddleware',
-    'cms.middleware.language.LanguageCookieMiddleware',
 )
 ########## END MIDDLEWARE CONFIGURATION
 
@@ -223,41 +217,23 @@ DJANGO_APPS = (
     'django.contrib.staticfiles',
 
     # Useful template tags:
-    # 'django.contrib.humanize',
+    'django.contrib.humanize',
 
     # Admin panel and documentation:
     'suit',
+    'suit_ckeditor',
+    'suit_redactor',
     'django.contrib.admin',
 )
 
 THIRD_PARTY_APPS = (
     'south',
     'django_extensions',
-    'cms',
-    'mptt',
-    'menus',
-    'sekizai',
-    'cms.plugins.file',
-    'cms.plugins.flash',
-    'cms.plugins.googlemap',
-    'cms.plugins.link',
-    'cms.plugins.picture',
-    'cms.plugins.snippet',
-    'cms.plugins.teaser',
-    'cms.plugins.text',
-    'cms.plugins.video',
-    'cms.plugins.twitter',
-    'filer',
-    'cmsplugin_filer_file',
-    'cmsplugin_filer_folder',
-    'cmsplugin_filer_image',
-    'cmsplugin_filer_teaser',
-    'cmsplugin_filer_video',
-    'reversion'
 )
 
 # Apps specific for this project go here.
 LOCAL_APPS = (
+    'blog',
 )
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
@@ -312,11 +288,7 @@ SUIT_CONFIG = {
     'ADMIN_NAME': u'Cuble Admin',
     'MENU_ICONS': {
         'sites': 'icon-leaf',
-        'advertisements': 'icon-bullhorn',
-        'brands': 'icon-shopping-cart',
-        'devices': 'icon-flag',
-        'tastypie': 'icon-wrench',
-        'users': 'icon-user',
+        'auth': 'icon-user',
     }
 }
 ########## END SUIT CONFIGURATION

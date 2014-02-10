@@ -1,8 +1,4 @@
-django
-django-cms
-django-extensions
+django==1.6.2
 South
 Pillow
-django-filer
-django-reversion
-cmsplugin-filer
+django-suit-ckeditor

@@ -2,7 +2,7 @@
 """
 The MIT License (MIT)
 
-Copyright (c) 2013 Cuble Desarrollo S.L.
+Copyright (c) 2014 Cuble Desarrollo S.L.
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -23,32 +23,17 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
 """
-from .base import *
-
-########## DEBUG CONFIGURATION
-# See: https://docs.djangoproject.com/en/dev/ref/settings/#debug
-DEBUG = True
-
-# See: https://docs.djangoproject.com/en/dev/ref/settings/#template-debug
-TEMPLATE_DEBUG = DEBUG
-########## END DEBUG CONFIGURATION
-
-########## DATABASE CONFIGURATION
-# See: https://docs.djangoproject.com/en/dev/ref/settings/#databases
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': get_env_setting('MAGAPPZINE_DB_NAME'),
-        'USER': get_env_setting('MAGAPPZINE_DB_USER'),
-        'PASSWORD': get_env_setting('MAGAPPZINE_DB_PASSWORD'),
-        'HOST': get_env_setting('MAGAPPZINE_DB_HOST'),
-        'PORT': get_env_setting('MAGAPPZINE_DB_PORT'),
-    }
-}
-########## END DATABASE CONFIGURATION
+from django.db import models
+from django.conf import settings
 
 
-########## TASTYPIE CONFIGURATION
-TASTYPIE_FULL_DEBUG = True
-########## END TASTYPIE CONFIGURATION
+class Post(models.Model):
+    """
+    Post for blogging.
+    """
+
+    author = models.ForeignKey(settings.AUTH_USER_MODEL)
+
+    title = models.TextField(null=True, blank=True)
+    content = models.TextField(null=True, blank=True)
 

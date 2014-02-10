@@ -113,9 +113,6 @@
                 {% for message in messages %}
                   <div class="alert alert-{% firstof message.tags 'info' %}">
                     <button class="close" data-dismiss="alert">×</button>
-                    <strong>
-                      {% if message.tags %}{{ message.tags|capfirst }}{% else %}
-                        Message{% endif %}!</strong>
                     {{ message }}
                   </div>
                 {% endfor %}
@@ -179,19 +176,15 @@
     <div class="content">
       <div class="tools">
         {% block footer_links %}
-          {% comment %}
           <a href="http://djangosuit.com/support/" target="_blank" class="icon"><i class="icon-question-sign"></i>Support</a>
           <a href="http://djangosuit.com/pricing/" target="_blank" class="icon"><i class="icon-bookmark"></i>Licence</a>
           <a href="http://github.com/darklow/django-suit/issues" target="_blank" class="icon"><i class="icon-comment"></i>Report a bug</a>
-          {% endcomment %}
         {% endblock %}
       </div>
 
       <div class="copyright">
         {% block copyright %}
-          {% comment %}
           Copyright &copy; 2013 DjangoSuit.com<br>Developed by <a href="http://djangosuit.com" target="_blank">DjangoSuit.com</a>
-          {% endcomment %}
         {% endblock %}
       </div>
 

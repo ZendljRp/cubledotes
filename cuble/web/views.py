@@ -23,15 +23,20 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
 """
-from django.conf.urls import patterns, include, url
-from django.contrib import admin
-from web.views import LandingView
+from django.shortcuts import render
+from django.views.generic import View
 
-admin.autodiscover()
 
-urlpatterns = patterns(
-    '',
-    url(r'^$', LandingView.as_view(), name="landing"),
-    # url(r'^blog/', include('blog.urls')),
-    url(r'^admin/', include(admin.site.urls)),
-)
+class LandingView(View):
+    """
+    Landing page.
+    """
+
+    @staticmethod
+    def get(request):
+        """
+        Get langing page.
+        @param request:
+        @return:
+        """
+        return render(request, "landing.html")

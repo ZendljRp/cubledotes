@@ -1,0 +1,78 @@
+@import "bootstrap/bootstrap.less";
+
+// Brand colors
+@cuble_red: #e74c3c;
+@cuble_orange: #e77e22;
+@cuble_yellow: #f1c40f;
+@cuble_red_dark: #c0392b;
+@cuble_orange_dark: #d25400;
+@cuble_yellow_dark: #f39c12;
+
+@cuble_grey_light: #ecf0f1;
+@cuble_black: #383637;
+
+body {
+  color: @cuble_black;
+}
+h2, h3, h4 {
+  color: @cuble_red;
+  &.alt-header {
+    color: #fff;
+  }
+}
+
+// Backgorund
+// TODO Add media queries
+.half-background {
+  position: fixed;
+  top: 0px;
+  right: 0px;
+  width: 50%;
+  height: 100%;
+  background-color: @cuble_red;
+  z-index: -1;
+}
+
+// Warps
+.warp {
+  width: 100%;
+  &-grey {
+    background-color: @cuble_grey_light;
+  }
+  &-white {
+    background-color: #fff;
+  }
+}
+
+// Header and menú
+.warp-header {
+  margin-top: 60px;
+  margin-bottom: 45px;
+}
+.menu {
+  text-transform: uppercase;
+  ul {
+    height: 100%;
+  }
+  li {
+    float: left;
+    height: 100%;
+    margin-right: 5%;
+  }
+  a {
+    color: #fff;
+    text-decoration: none;
+  }
+}
+
+// Claim
+.warp-claim {
+  padding-top: 20px;
+  padding-bottom: 20px;
+  strong {
+    color: @cuble_red
+  }
+  h3 {
+    color: @cuble_black;
+  }
+}
