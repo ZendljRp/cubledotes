@@ -23,33 +23,37 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
 """
-from django.forms import ModelForm, TextInput
-from django.contrib import admin
+from django.conf import settings
+from django.utils import timezone
+from django.utils.translation import ugettext as _
+from django.db import models
+from filer.fields.file import FilerFileField
+from core.managers import ArticlesManager
 
-from suit_redactor.widgets import RedactorWidget
 
-from blog.models import Post
+class AbstractArticle(models.Model):
+    """
+    Abstract model for articles, posts, projects, etc.
+    """
+    DRAFT, SCHEDULED, PUBLISHED = (0, 1, 2)
+    STATUSES = (
+        (DRAFT, _("Draft")),
+        (SCHEDULED, _("Scheduled")),
+        (PUBLISHED, _("Published")),
+    )
 
+    status = models.PositiveIntegerField(choices=STATUSES, default=DRAFT)
+    author = models.ForeignKey(settings.AUTH_USER_MODEL)
+    title = models.TextField()
+    slug = models.SlugField(blank=True, unique=True)
+    content = models.TextField(null=True, blank=True)
 
-class PostForm(ModelForm):
+    created_at = models.DateTimeField(default=timezone.now())
+    scheduled_at = models.DateTimeField(null=True, blank=True)
+
+    outstanding_image = FilerFileField(null=True, blank=True)
+
+    objects = ArticlesManager()
 
     class Meta:
-        widgets = {
-            'title': TextInput(),
-            'content': RedactorWidget(editor_options={"minHeight": 500})
-        }
-
-
-class PostAdmin(admin.ModelAdmin):
-    list_display = ['id', 'title', 'created_at', 'status']
-    list_filter = ('status', )
-    form = PostForm
-    fieldsets = [
-        (None, {'fields': ('title', 'slug', 'author', 'status', 'outstanding_image')}),
-        ('Dates', {'fields': ('created_at', 'scheduled_at',)}),
-        ('Tags', {'fields': ('tags', )}),
-        ('Content', {'classes': ('full-width',), 'fields': ('content',)}),
-    ]
-
-
-admin.site.register(Post, PostAdmin)
+        abstract = True

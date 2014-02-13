@@ -27,11 +27,10 @@ from django.forms import ModelForm, TextInput
 from django.contrib import admin
 
 from suit_redactor.widgets import RedactorWidget
+from projects.models import Project
 
-from blog.models import Post
 
-
-class PostForm(ModelForm):
+class ProjectForm(ModelForm):
 
     class Meta:
         widgets = {
@@ -40,16 +39,16 @@ class PostForm(ModelForm):
         }
 
 
-class PostAdmin(admin.ModelAdmin):
+class ProjectAdmin(admin.ModelAdmin):
     list_display = ['id', 'title', 'created_at', 'status']
     list_filter = ('status', )
-    form = PostForm
+    form = ProjectForm
     fieldsets = [
         (None, {'fields': ('title', 'slug', 'author', 'status', 'outstanding_image')}),
         ('Dates', {'fields': ('created_at', 'scheduled_at',)}),
-        ('Tags', {'fields': ('tags', )}),
+        ('Meta', {'fields': ('tags', 'description')}),
         ('Content', {'classes': ('full-width',), 'fields': ('content',)}),
     ]
 
 
-admin.site.register(Post, PostAdmin)
+admin.site.register(Project, ProjectAdmin)

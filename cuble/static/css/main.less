@@ -11,13 +11,52 @@
 @cuble_grey_light: #ecf0f1;
 @cuble_black: #383637;
 
+@brand-primary: @cuble_red;
+
+@import url(http://fonts.googleapis.com/css?family=Open+Sans);
+
 body {
   color: @cuble_black;
+  font-family: 'Open Sans', sans-serif;
 }
 h2, h3, h4 {
   color: @cuble_red;
-  &.alt-header {
+  font-weight: bold;
+  &.white {
     color: #fff;
+  }
+  &.black {
+    color: @cuble_black;
+  }
+}
+
+
+// Labels
+.label-inverse {
+  background-color: @cuble_grey_light;
+  color: @cuble_black;
+}
+
+// List styles
+ul.list-special {
+  padding: 0;
+  li {
+    background: url(../img/item.png) no-repeat left 50%;
+    padding: 3px 0px 3px 24px !important;
+    list-style: none;
+    margin: 0;
+    a {
+      color: @cuble_black;
+    }
+  }
+  &-alt {
+    padding: 0;
+    li {
+      background: url(../img/item-alt.png) no-repeat left 50%;
+      padding: 3px 0px 3px 24px !important;
+      list-style: none;
+      margin: 0;
+    }
   }
 }
 
@@ -31,26 +70,43 @@ h2, h3, h4 {
   height: 100%;
   background-color: @cuble_red;
   z-index: -1;
+  @media (max-width: @screen-xs-max) {
+    .responsive-invisibility();
+  }
+  @media (min-width: @screen-sm-min) and (max-width: @screen-sm-max) {
+    .responsive-invisibility();
+  }
 }
 
 // Warps
 .warp {
   width: 100%;
+  margin-top: 42px;
+  margin-bottom: 38px;
   &-grey {
+    padding-top: 42px;
+    padding-bottom: 38px;
+    margin: 0;
     background-color: @cuble_grey_light;
   }
   &-white {
+    padding-top: 42px;
+    padding-bottom: 38px;
+    margin: 0;
     background-color: #fff;
+  }
+  &-lead {
+    margin-top: 60px;
+    margin-bottom: 45px;
   }
 }
 
 // Header and menú
-.warp-header {
-  margin-top: 60px;
-  margin-bottom: 45px;
-}
 .menu {
   text-transform: uppercase;
+  font-size: 15px;
+  height: 88-32px;
+  padding-top: 32px;
   ul {
     height: 100%;
   }
@@ -63,16 +119,76 @@ h2, h3, h4 {
     color: #fff;
     text-decoration: none;
   }
+  a:hover {
+    padding-bottom: 10px;
+    border-bottom: 5px @cuble_red_dark solid;
+  }
+  .active {
+    font-weight: bold;
+  }
 }
 
 // Claim
-.warp-claim {
-  padding-top: 20px;
-  padding-bottom: 20px;
+.lead {
+  color: @cuble_black;
+  font-size: 26.25px;
+  margin-bottom: 0;
   strong {
     color: @cuble_red
   }
-  h3 {
-    color: @cuble_black;
+}
+
+// Footer
+footer {
+  .menu {
+    a {
+      color: @cuble_black;
+    }
+  }
+  .contact-info
+  {
+    color: #fff;
+    a {
+      color: #fff;
+    }
+    i {
+      font-size: 32px;
+    }
+    ul {
+      list-style: none;
+    }
+    li {
+      float: right;
+      margin-left: 3%;
+    }
+  }
+}
+
+// Blog
+article {
+  margin-bottom: 10%;
+}
+article h3:first-child {
+  margin-bottom: 5%;
+}
+.outstanding-image {
+  margin-bottom: 5%;
+}
+
+// Sidebar
+.sidebar-module {
+  background-color: @cuble_grey_light;
+  margin-bottom: 3%;
+  padding: 15px 25px;
+}
+
+// Projects
+.project-header {
+  margin-bottom: 5%;
+  h2 {
+    margin-bottom: 4%;
+  }
+  li {
+    margin-right: 3% !important;
   }
 }

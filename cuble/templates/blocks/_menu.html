@@ -1,0 +1,10 @@
+{% load i18n %}
+<nav class="menu">
+    <ul>
+        <li><a href="#" class="active">{% trans "Home" %}</a></li>
+        <li><a href="#">{% trans "Services" %}</a></li>
+        <li><a href="{% url "projects" %}">{% trans "Work" %}</a></li>
+        <li><a href="{% url "blog" %}">{% trans "Blog" %}</a></li>
+        <li><a href="#">{% trans "Contact" %}</a></li>
+    </ul>
+</nav>

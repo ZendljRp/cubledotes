@@ -23,33 +23,3 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
 """
-from django.forms import ModelForm, TextInput
-from django.contrib import admin
-
-from suit_redactor.widgets import RedactorWidget
-
-from blog.models import Post
-
-
-class PostForm(ModelForm):
-
-    class Meta:
-        widgets = {
-            'title': TextInput(),
-            'content': RedactorWidget(editor_options={"minHeight": 500})
-        }
-
-
-class PostAdmin(admin.ModelAdmin):
-    list_display = ['id', 'title', 'created_at', 'status']
-    list_filter = ('status', )
-    form = PostForm
-    fieldsets = [
-        (None, {'fields': ('title', 'slug', 'author', 'status', 'outstanding_image')}),
-        ('Dates', {'fields': ('created_at', 'scheduled_at',)}),
-        ('Tags', {'fields': ('tags', )}),
-        ('Content', {'classes': ('full-width',), 'fields': ('content',)}),
-    ]
-
-
-admin.site.register(Post, PostAdmin)

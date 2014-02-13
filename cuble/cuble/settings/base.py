@@ -88,6 +88,10 @@ DATABASES = {
 }
 ########## END DATABASE CONFIGURATION
 
+########## USER MODEL CONFIGURATION
+AUTH_USER_MODEL = 'profiles.User'
+########## END USER MODEL CONFIGURATION
+
 ########## AUTHENTICATION BACKENDS CONFIGURATION
 AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
@@ -196,6 +200,9 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.locale.LocaleMiddleware',
     'django.middleware.doc.XViewMiddleware',
     'django.middleware.common.CommonMiddleware',
+
+    # Blog
+    'core.middleware.ScheduledPostsMiddleware',
 )
 ########## END MIDDLEWARE CONFIGURATION
 
@@ -229,11 +236,19 @@ DJANGO_APPS = (
 THIRD_PARTY_APPS = (
     'south',
     'django_extensions',
+    'easy_thumbnails',
+    'django_gravatar',
+    'filer',
+    'mptt',
 )
 
 # Apps specific for this project go here.
 LOCAL_APPS = (
+    'core',
+    'tags',
+    'profiles',
     'blog',
+    'projects'
 )
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
@@ -289,6 +304,20 @@ SUIT_CONFIG = {
     'MENU_ICONS': {
         'sites': 'icon-leaf',
         'auth': 'icon-user',
+        'blog': 'icon-pencil',
+        'projects': 'icon-th-large',
+        'profiles': 'icon-user',
+        'tags': 'icon-tag',
+        'filer': 'icon-picture',
     }
 }
 ########## END SUIT CONFIGURATION
+
+########## EASY THUMBNAILS CONFIGURATION
+THUMBNAIL_ALIASES = {
+    '': {
+        'outstanding': {'size': (945, 262), 'crop': 'smart', 'upscale': False, 'quality': 90},
+        'box': {'size': (292, 292), 'crop': 'smart', 'upscale': True, 'quality': 90},
+    },
+}
+########## END EASY THUMBNAILS CONFIGURATION

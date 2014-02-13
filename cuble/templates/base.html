@@ -8,10 +8,11 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <title>{% block title %}{% trans "Cuble Desarrollo SL" %}{% endblock %}</title>
+        <title>{% block title %}{% trans "Cuble Desarrollo" %}{% endblock %}</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width">
 
+        <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
         <link rel="stylesheet" href="{% static "css/normalize.min.css" %}">
         <link rel="stylesheet" href="{% static "css/main.css" %}">
 
@@ -26,65 +27,70 @@
         {% block body %}
 
         {% block header %}
-        <div class="warp warp-header">
+        <header class="warp-lead">
             <div class="container">
                 <div class="row">
                     <!-- Logo -->
                     <div class="col-md-6">
-                        <img src="{% static "img/logo.png" %}" />
+                        <a href="{% url "landing" %}"><img src="{% static "img/logo.png" %}" /></a>
                     </div>
                     <!-- Menu -->
                     <div class="col-md-6">
-                        <nav class="menu">
-                            <ul>
-                                <li><a href="#">{% trans "Home" %}</a></li>
-                                <li><a href="#">{% trans "Services" %}</a></li>
-                                <li><a href="#">{% trans "Work" %}</a></li>
-                                <li><a href="#">{% trans "Blog" %}</a></li>
-                                <li><a href="#">{% trans "Contact" %}</a></li>
-                            </ul>
-                        </nav>
+                        {% include "blocks/_menu.html" %}
                     </div>
                 </div>
             </div>
-        </div>
+        </header>
         {% endblock header %}
 
         {% block claim %}
-        <div class="warp-grey warp-claim">
+        <div class="warp-grey">
             <div class="container">
                 <div class="row">
                     <div class="col-md-12">
-                        {% block claim_content %}
-                        <h3>{% blocktrans %}We're <strong>developers</strong> who are passionate about creating great products.{% endblocktrans %}</h3>
-                        <h3>{% blocktrans %}We <strong>solve problems</strong> for our clients.{% endblocktrans %}</h3>
-                        {% endblock claim_content %}
+                        {% block claim_content %}{% endblock claim_content %}
                     </div>
                 </div>
             </div>
         </div>
         {% endblock claim %}
 
-        {% block content %}
+        {% block main %}
         <div class="warp">
             <div class="container">
-                <div class="row">
-                    <div class="col-md-3">
-                        <h3>{% trans "Backend development" %}</h3>
-                    </div>
-                    <div class="col-md-3">
-                        <h3>{% trans "Scrum methodologies" %}</h3>
-                    </div>
-                    <div class="col-md-3">
-                        <h3 class="alt-header">{% trans "Django experts" %}</h3>
-                    </div>
-                    <div class="col-md-3">
-                        <h3 class="alt-header">{% trans "Grow with us" %}</h3>
-                    </div>
-                </div>
+                {% block main_content %}{% endblock main_content %}
             </div>
         </div>
-        {% endblock content %}
+        {% endblock main %}
+
+        {% block extra %}{% endblock extra %}
+
+        {% block footer %}
+        <footer class="warp">
+            <div class="container">
+                {% block footer_content %}
+                    <div class="row">
+                        <div class="col-md-6">
+                            {% include "blocks/_menu.html" %}
+                        </div>
+                        <div class="col-md-6 text-right contact-info">
+                            <ul class="clearfix">
+                                <li><a href="https://github.com/cubledesarrollo"><i class="fa fa-github"></i></a></li>
+                                <li><a href="https://plus.google.com/114449356144896554020/"><i class="fa fa-google-plus-square"></i></a></li>
+                                <li><a href="http://www.facebook.com/cuble.es"><i class="fa fa-facebook-square"></i></a></li>
+                                <li><a href="https://twitter.com/cuble_es"><i class="fa fa-twitter"></i></a></li>
+                            </ul>
+                            <p>
+                                <a href="mailto:info@cuble.es">info@cuble.es</a>
+                                <br/>
+                                <a href="tel:+34963211830">96 321 18 30</a>
+                            </p>
+                        </div>
+                    </div>
+                {% endblock footer_content %}
+            </div>
+        </footer>
+        {% endblock footer %}
 
         {% endblock body %}
 

@@ -1,0 +1,20 @@
+{% extends "projects/base.html" %}
+{% load i18n %}
+{% load static %}
+{% load thumbnail %}
+
+{% block claim_content %}
+    <h2>{% trans "Work" %}{% if tag %} &raquo; #{{ tag.name }}{% endif %}</h2>
+{% endblock %}
+
+{% block main_content %}
+    <div class="row">
+    {% for project in projects %}
+        <div class="col-md-3">
+            <p><img src="{{ project.outstanding_image|thumbnail_url:'box' }}"  class="img-responsive" /></p>
+            <a href="{% url "project" slug=project.slug %}"><h3>{{ project.title }}</h3></a>
+            <p>{{ project.description }}</p>
+        </div>
+    {% endfor %}
+    </div>
+{% endblock %}

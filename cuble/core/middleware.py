@@ -2,7 +2,7 @@
 """
 The MIT License (MIT)
 
-Copyright (c) 2013 Cuble Desarrollo S.L.
+Copyright (c) 2014 Cuble Desarrollo S.L.
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -21,14 +21,24 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
-m
 
 """
-from django.contrib.auth.models import PermissionsMixin, AbstractUser
+from django.utils import timezone
+from blog.models import Post
+from projects.models import Project
 
 
-class User(AbstractUser, PermissionsMixin):
+class ScheduledPostsMiddleware(object):
     """
-    Cuble user.
+    Makes published all posts according they scheduled date.
     """
-    pass
+
+    @staticmethod
+    def process_request(request):
+        """
+        @param request:
+        @return:
+        """
+        Post.objects.filter(status=Post.SCHEDULED, scheduled_at__lte=timezone.now()).update(status=Post.PUBLISHED)
+        Project.objects.filter(status=Post.SCHEDULED, scheduled_at__lte=timezone.now()).update(status=Post.PUBLISHED)
+        return None

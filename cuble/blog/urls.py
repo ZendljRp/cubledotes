@@ -23,10 +23,14 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
 """
-from django.conf.urls import patterns, include, url
+from django.conf.urls import patterns, url
+from blog.views import PostsListView, PostDetailsView, PostsTagListView
+
 
 urlpatterns = patterns(
     '',
-    url(r'^admin/', include(admin.site.urls)),
+    url(r'^$', PostsListView.as_view(), name="blog"),
+    url(r'^tag/(?P<slug>.+)/$', PostsTagListView.as_view(), name="posts_tag"),
+    url(r'^(?P<slug>.+)/$', PostDetailsView.as_view(), name="post"),
 )
 

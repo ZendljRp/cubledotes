@@ -23,49 +23,26 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
 """
-from django.core.urlresolvers import reverse
 from django.db import models
 from django.utils.text import slugify
-from django.utils.translation import ugettext as _
-from core.models import AbstractArticle
-from tags.models import Tag
 
 
-class Post(AbstractArticle):
+class Tag(models.Model):
     """
-    Post for blogging.
+    Tag for posts.
     """
-    tags = models.ManyToManyField(Tag, related_name="posts")
+
+    name = models.CharField(max_length=128)
+    slug = models.SlugField(blank=True, unique=True)
 
     def __unicode__(self):
-        return self.title
-
-    def _read_more_tag(self):
-        """
-        <p><a href="{% url "post" slug=post.slug %}">{% trans "Seguir leyendo..." %}</a></p>
-        @return:
-        """
-        return u'<p><a href="{}">{}</a></p>'.format(
-            reverse("post", kwargs={'slug': self.slug}),
-            _(u"Seguir leyendo...")
-        )
-
-    def summary(self):
-        """
-        Split content using <!--more-->
-        """
-        splited_content = self.content.split(u"<!--more-->")
-        read_more = self._read_more_tag() if len(splited_content) > 1 else u""
-        return u"{}{}".format(
-            splited_content[0],
-            read_more
-        )
+        return self.name
 
     def save(self, *args, **kwargs):
         """
         @param args:
         @param kwargs:
         """
-        slug_base = self.slug if self.slug else self.title
+        slug_base = self.slug if self.slug else self.name
         self.slug = slugify(slug_base)
-        super(Post, self).save(*args, **kwargs)
+        super(Tag, self).save(*args, **kwargs)

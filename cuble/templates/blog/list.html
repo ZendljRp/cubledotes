@@ -1,0 +1,15 @@
+{% extends "blog/base.html" %}
+{% load i18n %}
+{% load static %}
+
+{% block claim_content %}
+    <h2>{% trans "Blog" %}{% if tag %} &raquo; #{{ tag.name }}{% endif %}</h2>
+{% endblock %}
+
+{% block main_content %}
+    {% for post in posts %}
+        {% with summary=True %}
+            {% include "blog/blocks/_post.html" %}
+        {% endwith %}
+    {% endfor %}
+{% endblock %}

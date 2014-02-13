@@ -1,4 +1,9 @@
 django==1.6.2
 South
 Pillow
+django-extensions
 django-suit-ckeditor
+django-suit-redactor
+easy_thumbnails
+django-gravatar2
+django-filer

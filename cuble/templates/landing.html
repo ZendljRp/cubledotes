@@ -1,1 +1,74 @@
 {% extends "base.html" %}
+{% load i18n %}
+{% load static %}
+
+{% block claim_content %}
+    <p class="lead">{% blocktrans %}We're <strong>developers</strong> who are passionate about creating great products.{% endblocktrans %}</p>
+    <p class="lead">{% blocktrans %}We <strong>solve problems</strong> for our clients.{% endblocktrans %}</p>
+{% endblock %}
+
+{% block main_content %}
+    <div class="row">
+        <div class="col-md-3">
+            <p class="text-center"><img src="{% static "img/gears.png" %}" /></p>
+            <h3>{% trans "Backend development" %}</h3>
+            <p>Texto de relleno y tal. Me
+                gusta el chocolate negro,
+                70% parriba. Ta bueno
+                mmmm. Escribo un poco
+                más y au, ya está, ala.</p>
+        </div>
+        <div class="col-md-3">
+            <p class="text-center"><img src="{% static "img/itera.png" %}" /></p>
+            <h3>{% trans "Scrum methodologies" %}</h3>
+            <p>Texto de relleno y tal. Me
+                gusta el chocolate negro,
+                70% parriba. Ta bueno
+                mmmm. Escribo un poco
+                más y au, ya está, ala.</p>
+        </div>
+        <div class="col-md-3">
+            <p class="text-center"><img src="{% static "img/check.png" %}" /></p>
+            <h3 class="white">{% trans "Django experts" %}</h3>
+            <p>Texto de relleno y tal. Me
+                gusta el chocolate negro,
+                70% parriba. Ta bueno
+                mmmm. Escribo un poco
+                más y au, ya está, ala.</p>
+        </div>
+        <div class="col-md-3">
+            <p class="text-center"><img src="{% static "img/grow.png" %}" /></p>
+            <h3 class="white">{% trans "Grow with us" %}</h3>
+            <p>Texto de relleno y tal. Me
+                gusta el chocolate negro,
+                70% parriba. Ta bueno
+                mmmm. Escribo un poco
+                más y au, ya está, ala.</p>
+        </div>
+    </div>
+{% endblock main_content %}
+
+{% block extra %}
+    <div class="warp-grey">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h3>{% trans "¡Confía en nosotros!" %}</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="warp-white">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 col-md-offset-3 text-center">
+                    <p>"Cuble are technically strong and easy to work with. They enabled the fast development of a
+                        new class of biotech instrument with a built-in web server, working hard to keep the project
+                        on schedule with minimum oversight. Cuble were responsive to our needs, and together we
+                        created a great product with a sustainable code base".</p>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock extra %}

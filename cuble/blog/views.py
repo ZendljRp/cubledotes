@@ -23,49 +23,56 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
 """
-from django.core.urlresolvers import reverse
-from django.db import models
-from django.utils.text import slugify
-from django.utils.translation import ugettext as _
-from core.models import AbstractArticle
-from tags.models import Tag
+from django.shortcuts import render, get_object_or_404
+from django.views.generic import View
+from blog.models import Post, Tag
 
 
-class Post(AbstractArticle):
+class PostsListView(View):
     """
-    Post for blogging.
+    List of posts.
     """
-    tags = models.ManyToManyField(Tag, related_name="posts")
 
-    def __unicode__(self):
-        return self.title
-
-    def _read_more_tag(self):
+    @staticmethod
+    def get(request):
         """
-        <p><a href="{% url "post" slug=post.slug %}">{% trans "Seguir leyendo..." %}</a></p>
+
+        @param request:
         @return:
         """
-        return u'<p><a href="{}">{}</a></p>'.format(
-            reverse("post", kwargs={'slug': self.slug}),
-            _(u"Seguir leyendo...")
-        )
+        posts = Post.objects.requested_objects(request)
+        return render(request, "blog/list.html", {"posts": posts})
 
-    def summary(self):
-        """
-        Split content using <!--more-->
-        """
-        splited_content = self.content.split(u"<!--more-->")
-        read_more = self._read_more_tag() if len(splited_content) > 1 else u""
-        return u"{}{}".format(
-            splited_content[0],
-            read_more
-        )
 
-    def save(self, *args, **kwargs):
+class PostsTagListView(View):
+    """
+    List of posts.
+    """
+
+    @staticmethod
+    def get(request, slug):
         """
-        @param args:
-        @param kwargs:
+
+        @param request:
+        @return:
         """
-        slug_base = self.slug if self.slug else self.title
-        self.slug = slugify(slug_base)
-        super(Post, self).save(*args, **kwargs)
+        tag = get_object_or_404(Tag, slug=slug)
+        posts = Post.objects.requested_objects(request, queryset=tag.posts.all())
+        return render(request, "blog/list.html", {"posts": posts, "tag": tag})
+
+
+class PostDetailsView(View):
+    """
+    List of posts.
+    """
+
+    @staticmethod
+    def get(request, slug):
+        """
+
+        @param request:
+        @param slug:
+        @return:
+        """
+        post = get_object_or_404(Post, slug=slug)
+        return render(request, "blog/details.html", {"post": post})

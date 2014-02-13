@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load static %}
+
+{% block claim_content %}
+    <h2>{% trans "Blog" %}</h2>
+{% endblock %}
+
+{% block main %}
+    <div class="warp-white">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    {% block main_content %}{% endblock main_content %}
+                </div>
+                {% comment %}<div class="col-md-4 hidden-xs hidden-sm">
+                    {% block sidebar %}{% include "blog/blocks/_sidebar.html" %}{% endblock sidebar %}
+                </div>{% endcomment %}
+            </div>
+        </div>
+    </div>
+{% endblock main %}
