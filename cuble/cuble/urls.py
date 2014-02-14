@@ -28,7 +28,7 @@ from django.contrib import admin
 from django.conf import settings
 from django.conf.urls.static import static
 
-from web.views import LandingView
+from pages.views import LandingView
 
 admin.autodiscover()
 
