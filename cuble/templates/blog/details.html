@@ -2,6 +2,10 @@
 {% load i18n %}
 {% load static %}
 
+{% block meta %}
+    <meta name="author" content="{{ post.author.get_full_name }}">
+{% endblock meta %}
+
 {% block main_content %}
     {% include "blog/blocks/_post.html" %}
     <div class="row">
