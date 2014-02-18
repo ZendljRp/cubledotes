@@ -23,50 +23,27 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
 """
-from django.shortcuts import render
-from django.views.generic import View
+import re
+
+from django import template
+from django.core.urlresolvers import reverse, NoReverseMatch
+
+register = template.Library()
 
 
-class LandingView(View):
-    """
-    Landing page.
-    """
-
-    @staticmethod
-    def get(request):
-        """
-        Get langing page.
-        @param request:
-        @return:
-        """
-        return render(request, "landing.html")
-
-
-class ServicesView(View):
-    """
-    Landing page.
+@register.simple_tag(takes_context=True)
+def active(context, pattern_or_urlname):
     """
 
-    @staticmethod
-    def get(request):
-        """
-        Get langing page.
-        @param request:
-        @return:
-        """
-        return render(request, "pages/services.html")
-
-
-class ContactView(View):
+    @param context:
+    @param pattern_or_urlname:
+    @return:
     """
-    Landing page.
-    """
-
-    @staticmethod
-    def get(request):
-        """
-        Get langing page.
-        @param request:
-        @return:
-        """
-        return render(request, "pages/contact.html")
+    try:
+        pattern = '^' + reverse(pattern_or_urlname)
+    except NoReverseMatch:
+        pattern = pattern_or_urlname
+    path = context['request'].path
+    if re.search(pattern, path):
+        return 'active'
+    return ''

@@ -1,10 +1,11 @@
 {% load i18n %}
+{% load menu_tags %}
 <nav class="menu">
     <ul>
-        <li><a href="#" class="active">{% trans "Home" %}</a></li>
-        <li><a href="#">{% trans "Services" %}</a></li>
-        <li><a href="{% url "projects" %}">{% trans "Work" %}</a></li>
-        <li><a href="{% url "blog" %}">{% trans "Blog" %}</a></li>
-        <li><a href="#">{% trans "Contact" %}</a></li>
+        <li><a href="{% url "landing" %}" class="{% active '^/$' %}">{% trans "Home" %}</a></li>
+        <li><a href="{% url "services" %}" class="{% active 'services' %}">{% trans "Services" %}</a></li>
+        <li><a href="{% url "projects" %}" class="{% active 'projects' %}">{% trans "Work" %}</a></li>
+        <li><a href="{% url "blog" %}" class="{% active 'blog' %}">{% trans "Blog" %}</a></li>
+        <li><a href="{% url "contact" %}" class="{% active 'contact' %}">{% trans "Contact" %}</a></li>
     </ul>
 </nav>
