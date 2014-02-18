@@ -240,6 +240,7 @@ THIRD_PARTY_APPS = (
     'django_gravatar',
     'filer',
     'mptt',
+    'storages',
 )
 
 # Apps specific for this project go here.
