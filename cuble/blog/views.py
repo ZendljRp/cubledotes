@@ -23,9 +23,11 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
 """
+from django.contrib.sites.models import Site
 from django.contrib.syndication.views import Feed
 from django.core.urlresolvers import reverse
 from django.utils.feedgenerator import Atom1Feed
+from django.utils.safestring import mark_safe
 from django.utils.translation import ugettext as _
 from django.shortcuts import render, get_object_or_404
 from django.views.generic import View
@@ -97,7 +99,12 @@ class PostsFeed(Feed):
         return item.title
 
     def item_description(self, item):
-        return item.content
+        return mark_safe(
+            u'<p class="outstanding-image"><img src="{}" class="img-responsive center-block"></p>{}'.format(
+                item.outstanding_image.url,
+                item.content
+            )
+        )
 
     # item_link is only needed if NewsItem has no get_absolute_url method.
     def item_link(self, item):

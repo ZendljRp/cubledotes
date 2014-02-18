@@ -7,3 +7,5 @@ django-suit-redactor
 easy_thumbnails
 django-gravatar2
 django-filer
+boto
+django-storages
