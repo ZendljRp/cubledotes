@@ -61,5 +61,5 @@ DATABASES = {
 
 ########### STORAGES CONFIGURATION
 STATICFILES_STORAGE = 'core.s3utils.StaticRootS3BotoStorage'
-STATIC_URL = "//{}.s3.amazonaws.com/".format(AWS_STORAGE_BUCKET_NAME)
+STATIC_URL = "//{}.s3.amazonaws.com/static/".format(AWS_STORAGE_BUCKET_NAME)
 ########### END STORAGES CONFIGURATION
