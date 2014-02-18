@@ -24,12 +24,14 @@ THE SOFTWARE.
 
 """
 from django.conf.urls import patterns, url
-from blog.views import PostsListView, PostDetailsView, PostsTagListView
+from blog.views import PostsListView, PostDetailsView, PostsTagListView, PostsFeed, PostsAtomFeed
 
 
 urlpatterns = patterns(
     '',
     url(r'^$', PostsListView.as_view(), name="blog"),
+    url(r'^feed/', PostsFeed(), name="blog_feed"),
+    url(r'^atom/', PostsAtomFeed(), name="blog_atom"),
     url(r'^tag/(?P<slug>.+)/$', PostsTagListView.as_view(), name="posts_tag"),
     url(r'^(?P<slug>.+)/$', PostDetailsView.as_view(), name="post"),
 )

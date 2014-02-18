@@ -23,6 +23,10 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
 """
+from django.contrib.syndication.views import Feed
+from django.core.urlresolvers import reverse
+from django.utils.feedgenerator import Atom1Feed
+from django.utils.translation import ugettext as _
 from django.shortcuts import render, get_object_or_404
 from django.views.generic import View
 from blog.models import Post, Tag
@@ -76,3 +80,32 @@ class PostDetailsView(View):
         """
         post = get_object_or_404(Post, slug=slug)
         return render(request, "blog/details.html", {"post": post})
+
+
+class PostsFeed(Feed):
+    """
+    Feed RSS
+    """
+    title = "Cuble Blog"
+    link = "/blog/"
+    description = _("El blog de Cuble Desarrollo")
+
+    def items(self):
+        return Post.objects.order_by('-created_at')
+
+    def item_title(self, item):
+        return item.title
+
+    def item_description(self, item):
+        return item.content
+
+    # item_link is only needed if NewsItem has no get_absolute_url method.
+    def item_link(self, item):
+        return reverse('post', kwargs={"slug": item.slug})
+
+
+class PostsAtomFeed(PostsFeed):
+    """
+    Feed Atom
+    """
+    feed_type = Atom1Feed

@@ -27,6 +27,8 @@ from django.conf.urls import patterns, include, url
 from django.contrib import admin
 from django.conf import settings
 from django.conf.urls.static import static
+from django.core.urlresolvers import reverse_lazy
+from django.views.generic import RedirectView
 
 from pages.views import LandingView, ServicesView, ContactView
 
@@ -35,9 +37,16 @@ admin.autodiscover()
 urlpatterns = patterns(
     '',
     url(r'^$', LandingView.as_view(), name="landing"),
+
     url(r'^services/', ServicesView.as_view(), name="services"),
     url(r'^contact/', ContactView.as_view(), name="contact"),
     url(r'^blog/', include('blog.urls')),
     url(r'^work/', include('projects.urls')),
     url(r'^admin/', include(admin.site.urls)),
+
+    # Redirects
+    url(r'^feed/', RedirectView.as_view(url=reverse_lazy('blog_feed'))),
+    url(r'^rss/', RedirectView.as_view(url=reverse_lazy('blog_feed'))),
+    url(r'^atom/', RedirectView.as_view(url=reverse_lazy('blog_atom'))),
+
 ) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
