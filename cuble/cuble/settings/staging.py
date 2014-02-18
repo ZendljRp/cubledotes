@@ -60,6 +60,6 @@ DATABASES = {
 ########## END DATABASE CONFIGURATION
 
 ########### STORAGES CONFIGURATION
-STATICFILES_STORAGE = 'core.s3utils.MediaRootS3BotoStorage'
+STATICFILES_STORAGE = 'core.s3utils.StaticRootS3BotoStorage'
 STATIC_URL = "//{}.s3.amazonaws.com/".format(AWS_STORAGE_BUCKET_NAME)
 ########### END STORAGES CONFIGURATION

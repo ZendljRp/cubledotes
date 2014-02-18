@@ -326,7 +326,7 @@ THUMBNAIL_DEFAULT_STORAGE = "storages.backends.s3boto.S3BotoStorage"
 ########## END EASY THUMBNAILS CONFIGURATION
 
 ########### STORAGES CONFIGURATION
-DEFAULT_FILE_STORAGE = 'core.s3utils.StaticRootS3BotoStorage'
+DEFAULT_FILE_STORAGE = 'core.s3utils.MediaRootS3BotoStorage'
 AWS_ACCESS_KEY_ID = get_env_setting('AWS_ACCESS_KEY_ID')
 AWS_SECRET_ACCESS_KEY = get_env_setting('AWS_SECRET_ACCESS_KEY')
 AWS_STORAGE_BUCKET_NAME = get_env_setting('AWS_STORAGE_BUCKET_NAME')
