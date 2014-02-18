@@ -42,7 +42,7 @@ class ArticlesManager(models.Manager):
         if not queryset:
             queryset = self.all()
         posts_list = queryset.filter(status=self.model.PUBLISHED).order_by('-created_at')
-        paginator = Paginator(posts_list, 10)  # TODO Parametrizar
+        paginator = Paginator(posts_list, 5)  # TODO Parametrizar
         if page is None:
             page = request.GET.get('page')
         try:
