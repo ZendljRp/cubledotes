@@ -12,4 +12,13 @@
             {% include "blog/blocks/_post.html" %}
         {% endwith %}
     {% endfor %}
+
+    {% with objects=posts %}
+        <div class="row">
+            <div class="col-lg-offset-2 col-md-10">
+                {% include "blocks/_paginator.html" %}
+            </div>
+        </div>
+    {% endwith %}
+
 {% endblock %}
