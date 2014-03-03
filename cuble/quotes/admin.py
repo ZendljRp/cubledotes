@@ -23,54 +23,13 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
 """
-from django.shortcuts import render
-from django.views.generic import View
+from django.contrib import admin
+from django.contrib.admin import ModelAdmin
 from quotes.models import Quote
 
 
-class LandingView(View):
-    """
-    Landing page.
-    """
-
-    @staticmethod
-    def get(request):
-        """
-        Get langing page.
-        @param request:
-        @return:
-        """
-        data = {
-            "quotes": Quote.objects.all()
-        }
-        return render(request, "landing.html", data)
+class QuoteAdmin(ModelAdmin):
+    list_display = ['id', 'text', 'author']
 
 
-class ServicesView(View):
-    """
-    Landing page.
-    """
-
-    @staticmethod
-    def get(request):
-        """
-        Get langing page.
-        @param request:
-        @return:
-        """
-        return render(request, "pages/services.html")
-
-
-class ContactView(View):
-    """
-    Landing page.
-    """
-
-    @staticmethod
-    def get(request):
-        """
-        Get langing page.
-        @param request:
-        @return:
-        """
-        return render(request, "pages/contact.html")
+admin.site.register(Quote, QuoteAdmin)

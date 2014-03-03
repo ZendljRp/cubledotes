@@ -250,7 +250,8 @@ LOCAL_APPS = (
     'tags',
     'profiles',
     'blog',
-    'projects'
+    'projects',
+    'quotes',
 )
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps

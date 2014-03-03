@@ -63,10 +63,14 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-6 col-md-offset-3 text-center">
-                    <p>"Cuble are technically strong and easy to work with. They enabled the fast development of a
-                        new class of biotech instrument with a built-in web server, working hard to keep the project
-                        on schedule with minimum oversight. Cuble were responsive to our needs, and together we
-                        created a great product with a sustainable code base".</p>
+                    {# SLIDES OF QUOTES #}
+                    {% for quote in quotes %}
+                    <blockquote>
+                        <p>{{ quote.text }}</p>
+                        <cite>&ndash; {{ quote.author }}</cite>
+                    </blockquote>
+                    {% endfor %}
+                    {# END SLIDES OF QUOTES #}
                 </div>
             </div>
         </div>

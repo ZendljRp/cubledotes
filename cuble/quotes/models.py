@@ -23,54 +23,14 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
 """
-from django.shortcuts import render
-from django.views.generic import View
-from quotes.models import Quote
+from django.db import models
+from filer.fields.file import FilerFileField
 
 
-class LandingView(View):
+class Quote(models.Model):
     """
-    Landing page.
     """
 
-    @staticmethod
-    def get(request):
-        """
-        Get langing page.
-        @param request:
-        @return:
-        """
-        data = {
-            "quotes": Quote.objects.all()
-        }
-        return render(request, "landing.html", data)
-
-
-class ServicesView(View):
-    """
-    Landing page.
-    """
-
-    @staticmethod
-    def get(request):
-        """
-        Get langing page.
-        @param request:
-        @return:
-        """
-        return render(request, "pages/services.html")
-
-
-class ContactView(View):
-    """
-    Landing page.
-    """
-
-    @staticmethod
-    def get(request):
-        """
-        Get langing page.
-        @param request:
-        @return:
-        """
-        return render(request, "pages/contact.html")
+    author = models.CharField(max_length=256)
+    picture = FilerFileField(null=True, blank=True)
+    text = models.TextField()
