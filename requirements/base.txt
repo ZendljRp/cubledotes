@@ -9,3 +9,4 @@ django-gravatar2
 django-filer
 boto
 django-storages
+mysql-python
