@@ -19,6 +19,7 @@ body {
   color: @cuble_black;
   font-family: 'Open Sans', sans-serif;
 }
+
 h2, h3, h4 {
   color: @cuble_red;
   font-weight: bold;
@@ -29,7 +30,6 @@ h2, h3, h4 {
     color: @cuble_black;
   }
 }
-
 
 // Labels
 .label-inverse {
@@ -60,7 +60,7 @@ ul.list-special {
   }
 }
 
-// Backgorund
+// Background
 // TODO Add media queries
 .half-background {
   position: fixed;
@@ -75,6 +75,24 @@ ul.list-special {
   }
   @media (min-width: @screen-sm-min) and (max-width: @screen-sm-max) {
     .responsive-invisibility();
+  }
+}
+
+.warp.mobile-wrap {
+  @media (max-width: @screen-md-min) {
+    margin-bottom: 0;
+    .container {
+      width: 100%;
+      .row div {
+        padding: 20px;
+      }
+      .red {
+        background-color: @cuble_red;
+        &:last-child {
+          padding-bottom: 38px;
+        }
+      }
+    }
   }
 }
 
@@ -101,11 +119,54 @@ ul.list-special {
   }
 }
 
-// Header and menú
+// Header and menu
+.warp-lead {
+  @media (max-width: @screen-md-min) {
+    margin-top: 15px;
+    margin-bottom: 15px;
+  }
+}
+
+@grid-float-breakpoint: @screen-md-min;
+.row-menu {
+  @media (max-width: @screen-md-min) {
+    .responsive-invisibility();
+  }
+}
+
+.row-menu-collapse {
+  @media (min-width: @screen-md-min) {
+    .responsive-invisibility();
+  }
+  img {
+    height: 55px;
+  }
+  text-align: center;
+  .navbar-toggle {
+    position: absolute;
+    left: 0;
+    .icon-bar {
+      background-color: @cuble_red;
+      height: 4px;
+      width: 26px;
+      .border-bottom-radius(10px);
+      .border-top-radius(10px);
+    }
+  }
+  .nav{
+    font-size: 19px;
+    text-transform:uppercase;
+    .active{
+      background-color: @cuble_red;
+      color: #ffffff;
+    }
+  }
+}
+
 .menu {
   text-transform: uppercase;
   font-size: 15px;
-  height: 88-32px;
+  height: 56px; //88-32
   padding-top: 32px;
   ul {
     height: 100%;
@@ -126,6 +187,11 @@ ul.list-special {
   .active {
     font-weight: bold;
   }
+  @media (max-width: @screen-md-min) {
+    a {
+      color: @cuble_red;
+    }
+  }
 }
 
 // Claim
@@ -141,12 +207,14 @@ ul.list-special {
 // Footer
 footer {
   .menu {
+    @media (max-width: @screen-md-min) {
+      .responsive-invisibility();
+    }
     a {
       color: @cuble_black;
     }
   }
-  .contact-info
-  {
+  .contact-info {
     color: #fff;
     a {
       color: #fff;
@@ -162,15 +230,25 @@ footer {
       margin-left: 3%;
     }
   }
+  &.warp {
+    @media (max-width: @screen-md-min) {
+      margin-top: 0;
+      padding-top: 42px;
+      background-color: @cuble_red;
+      margin-bottom: 0;
+    }
+  }
 }
 
 // Blog
 article {
   margin-bottom: 10%;
 }
+
 article h3:first-child {
   margin-bottom: 5%;
 }
+
 .outstanding-image {
   margin-bottom: 5%;
 }
