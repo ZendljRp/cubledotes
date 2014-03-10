@@ -9,6 +9,7 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <title>{% block title %}{% trans "Cuble Desarrollo" %}{% endblock %}</title>
+
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width">
         {% block meta %}{% endblock meta %}
@@ -28,9 +29,8 @@
         <!--[if lt IE 7]>
             <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
         <![endif]-->
-        <div class="half-background"></div>
-
         {% block body %}
+        <div class="half-background"></div>
 
         {% block header %}
         <header class="warp-lead">
@@ -65,7 +65,7 @@
         {% endblock claim %}
 
         {% block main %}
-        <div class="warp mobile-wrap">
+        <div class="warp">
             <div class="container">
                 {% block main_content %}{% endblock main_content %}
             </div>
