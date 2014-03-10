@@ -4,41 +4,43 @@
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <title>{% block title %}{% trans "Cuble Desarrollo" %}{% endblock %}</title>
+<!--[if gt IE 8]><!-->
+<html class="no-js"> <!--<![endif]-->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>{% block title %}{% trans "Cuble Desarrollo" %}{% endblock %}</title>
 
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width">
-        {% block meta %}{% endblock meta %}
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
+    {% block meta %}{% endblock meta %}
 
-        <link rel="shortcut icon" href="{% static "favicon.ico" %}" />
+    <link rel="shortcut icon" href="{% static "favicon.ico" %}"/>
 
-        <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
-        <link rel="stylesheet" href="{% static "css/normalize.min.css" %}">
-        <link rel="stylesheet" href="{% static "css/main.css" %}">
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static "css/normalize.min.css" %}">
+    <link rel="stylesheet" href="{% static "css/main.css" %}">
 
-        <link rel="alternate" type="application/rss+xml" title="Cuble Desarrollo &raquo; Feed" href="{% url "blog_feed" %}" />
+    <link rel="alternate" type="application/rss+xml" title="Cuble Desarrollo &raquo; Feed"
+          href="{% url "blog_feed" %}"/>
 
-        <script src="{% static "js/vendor/modernizr-2.6.2-respond-1.1.0.min.js" %}"></script>
+    <script src="{% static "js/vendor/modernizr-2.6.2-respond-1.1.0.min.js" %}"></script>
 
-    </head>
-    <body>
-        <!--[if lt IE 7]>
+</head>
+<body>
+<!--[if lt IE 7]>
             <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
         <![endif]-->
-        {% block body %}
-        <div class="half-background"></div>
+{% block body %}
+    <div class="half-background"></div>
 
-        {% block header %}
+    {% block header %}
         <header class="warp-lead">
             <div class="container">
                 <div class="row row-menu">
                     <!-- Logo -->
                     <div class="col-md-6">
-                        <a href="{% url "landing" %}"><img src="{% static "img/logo.png" %}" /></a>
+                        <a href="{% url "landing" %}"><img src="{% static "img/logo.png" %}"/></a>
                     </div>
                     <!-- Menu -->
                     <div class="col-md-6">
@@ -50,9 +52,9 @@
                 </div>
             </div>
         </header>
-        {% endblock header %}
+    {% endblock header %}
 
-        {% block claim %}
+    {% block claim %}
         <div class="warp-grey">
             <div class="container">
                 <div class="row">
@@ -62,19 +64,19 @@
                 </div>
             </div>
         </div>
-        {% endblock claim %}
+    {% endblock claim %}
 
-        {% block main %}
+    {% block main %}
         <div class="warp">
             <div class="container">
                 {% block main_content %}{% endblock main_content %}
             </div>
         </div>
-        {% endblock main %}
+    {% endblock main %}
 
-        {% block extra %}{% endblock extra %}
+    {% block extra %}{% endblock extra %}
 
-        {% block footer %}
+    {% block footer %}
         <footer class="warp">
             <div class="container">
                 {% block footer_content %}
@@ -85,8 +87,10 @@
                         <div class="col-md-6 text-right contact-info red">
                             <ul class="clearfix">
                                 <li><a href="https://github.com/cubledesarrollo"><i class="fa fa-github"></i></a></li>
-                                <li><a href="https://plus.google.com/114449356144896554020/"><i class="fa fa-google-plus-square"></i></a></li>
-                                <li><a href="http://www.facebook.com/cuble.es"><i class="fa fa-facebook-square"></i></a></li>
+                                <li><a href="https://plus.google.com/114449356144896554020/"><i
+                                        class="fa fa-google-plus-square"></i></a></li>
+                                <li><a href="http://www.facebook.com/cuble.es"><i class="fa fa-facebook-square"></i></a>
+                                </li>
                                 <li><a href="https://twitter.com/cuble_es"><i class="fa fa-twitter"></i></a></li>
                             </ul>
                             <p>
@@ -94,28 +98,43 @@
                                 <br/>
                                 <a href="tel:+34963211830">96 321 18 30</a>
                             </p>
+
+                            <p>
+                                <a href="https://travis-ci.org/cubledesarrollo/django-cuble/">
+                                    <img src="https://travis-ci.org/cubledesarrollo/django-cuble.png?branch=master"
+                                         alt="travis"/>
+                                </a>
+                                <a href='https://coveralls.io/r/cubledesarrollo/django-cuble'>
+                                    <img src='https://coveralls.io/repos/cubledesarrollo/django-cuble/badge.png'
+                                         alt='Coverage Status'/></a>
+                            </p>
                         </div>
                     </div>
                 {% endblock footer_content %}
             </div>
         </footer>
-        {% endblock footer %}
+    {% endblock footer %}
 
-        {% endblock body %}
+{% endblock body %}
 
-        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
-        <script>window.jQuery || document.write('<script src="{% static "js/vendor/jquery-1.10.1.min.js" %}"><\/script>')</script>
-        <script src="{% static "js/vendor/jquery.quovolver.js" %}"></script>
-        <script src="{% static "js/vendor/bootstrap.min.js" %}"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="{% static "js/vendor/jquery-1.10.1.min.js" %}"><\/script>')</script>
+<script src="{% static "js/vendor/jquery.quovolver.js" %}"></script>
+<script src="{% static "js/vendor/bootstrap.min.js" %}"></script>
 
-        <script src="{% static "js/plugins.js" %}"></script>
-        <script src="{% static "js/main.js" %}"></script>
+<script src="{% static "js/plugins.js" %}"></script>
+<script src="{% static "js/main.js" %}"></script>
 
-        <script>
-            var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']];
-            (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
-            g.src='//www.google-analytics.com/ga.js';
-            s.parentNode.insertBefore(g,s)}(document,'script'));
-        </script>
-    </body>
+<script>
+    var _gaq = [
+        ['_setAccount', 'UA-XXXXX-X'],
+        ['_trackPageview']
+    ];
+    (function (d, t) {
+        var g = d.createElement(t), s = d.getElementsByTagName(t)[0];
+        g.src = '//www.google-analytics.com/ga.js';
+        s.parentNode.insertBefore(g, s)
+    }(document, 'script'));
+</script>
+</body>
 </html>
