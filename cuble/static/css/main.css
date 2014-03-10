@@ -5890,6 +5890,23 @@ ul.list-special-alt li {
     display: none !important;
   }
 }
+@media (max-width: 992px) {
+  .warp.mobile-wrap {
+    margin-bottom: 0;
+  }
+  .warp.mobile-wrap .container {
+    width: 100%;
+  }
+  .warp.mobile-wrap .container .row div {
+    padding: 20px;
+  }
+  .warp.mobile-wrap .container .red {
+    background-color: #e74c3c;
+  }
+  .warp.mobile-wrap .container .red:last-child {
+    padding-bottom: 38px;
+  }
+}
 .warp {
   width: 100%;
   margin-top: 42px;
@@ -5910,6 +5927,55 @@ ul.list-special-alt li {
 .warp-lead {
   margin-top: 60px;
   margin-bottom: 45px;
+}
+@media (max-width: 992px) {
+  .warp-lead {
+    margin-top: 15px;
+    margin-bottom: 15px;
+  }
+}
+@media (max-width: 992px) {
+  .row-menu,
+  tr.row-menu,
+  th.row-menu,
+  td.row-menu {
+    display: none !important;
+  }
+}
+.row-menu-collapse {
+  text-align: center;
+}
+@media (min-width: 992px) {
+  .row-menu-collapse,
+  tr.row-menu-collapse,
+  th.row-menu-collapse,
+  td.row-menu-collapse {
+    display: none !important;
+  }
+}
+.row-menu-collapse img {
+  height: 55px;
+}
+.row-menu-collapse .navbar-toggle {
+  position: absolute;
+  left: 0;
+}
+.row-menu-collapse .navbar-toggle .icon-bar {
+  background-color: #e74c3c;
+  height: 4px;
+  width: 26px;
+  border-bottom-right-radius: 10px;
+  border-bottom-left-radius: 10px;
+  border-top-right-radius: 10px;
+  border-top-left-radius: 10px;
+}
+.row-menu-collapse .nav {
+  font-size: 19px;
+  text-transform: uppercase;
+}
+.row-menu-collapse .nav .active {
+  background-color: #e74c3c;
+  color: #ffffff;
 }
 .menu {
   text-transform: uppercase;
@@ -5936,6 +6002,11 @@ ul.list-special-alt li {
 .menu .active {
   font-weight: bold;
 }
+@media (max-width: 992px) {
+  .menu a {
+    color: #e74c3c;
+  }
+}
 .lead {
   color: #383637;
   font-size: 26.25px;
@@ -5943,6 +6014,14 @@ ul.list-special-alt li {
 }
 .lead strong {
   color: #e74c3c;
+}
+@media (max-width: 992px) {
+  footer .menu,
+  trfooter .menu,
+  thfooter .menu,
+  tdfooter .menu {
+    display: none !important;
+  }
 }
 footer .menu a {
   color: #383637;
@@ -5962,6 +6041,14 @@ footer .contact-info ul {
 footer .contact-info li {
   float: right;
   margin-left: 3%;
+}
+@media (max-width: 992px) {
+  footer.warp {
+    margin-top: 0;
+    padding-top: 42px;
+    background-color: #e74c3c;
+    margin-bottom: 0;
+  }
 }
 article {
   margin-bottom: 10%;
