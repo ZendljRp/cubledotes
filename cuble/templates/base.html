@@ -35,7 +35,7 @@
         {% block header %}
         <header class="warp-lead">
             <div class="container">
-                <div class="row">
+                <div class="row row-menu">
                     <!-- Logo -->
                     <div class="col-md-6">
                         <a href="{% url "landing" %}"><img src="{% static "img/logo.png" %}" /></a>
@@ -44,6 +44,9 @@
                     <div class="col-md-6">
                         {% include "blocks/_menu.html" %}
                     </div>
+                </div>
+                <div class="row row-menu-collapse">
+                    {% include "blocks/_collapse_menu.html" %}
                 </div>
             </div>
         </header>
@@ -62,7 +65,7 @@
         {% endblock claim %}
 
         {% block main %}
-        <div class="warp">
+        <div class="warp mobile-wrap">
             <div class="container">
                 {% block main_content %}{% endblock main_content %}
             </div>
@@ -79,7 +82,7 @@
                         <div class="col-md-6">
                             {% include "blocks/_menu.html" %}
                         </div>
-                        <div class="col-md-6 text-right contact-info">
+                        <div class="col-md-6 text-right contact-info red">
                             <ul class="clearfix">
                                 <li><a href="https://github.com/cubledesarrollo"><i class="fa fa-github"></i></a></li>
                                 <li><a href="https://plus.google.com/114449356144896554020/"><i class="fa fa-google-plus-square"></i></a></li>
@@ -103,6 +106,7 @@
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
         <script>window.jQuery || document.write('<script src="{% static "js/vendor/jquery-1.10.1.min.js" %}"><\/script>')</script>
         <script src="{% static "js/vendor/jquery.quovolver.js" %}"></script>
+        <script src="{% static "js/vendor/bootstrap.min.js" %}"></script>
 
         <script src="{% static "js/plugins.js" %}"></script>
         <script src="{% static "js/main.js" %}"></script>

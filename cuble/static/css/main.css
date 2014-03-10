@@ -597,7 +597,7 @@ dt {
 dd {
   margin-left: 0;
 }
-@media (min-width: 768px) {
+@media (min-width: 992px) {
   .dl-horizontal dt {
     float: left;
     width: 160px;
@@ -3101,7 +3101,7 @@ input[type="button"].btn-block {
   bottom: 100%;
   margin-bottom: 1px;
 }
-@media (min-width: 768px) {
+@media (min-width: 992px) {
   .navbar-right .dropdown-menu {
     left: auto;
     right: 0;
@@ -3644,12 +3644,12 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   margin-bottom: 20px;
   border: 1px solid transparent;
 }
-@media (min-width: 768px) {
+@media (min-width: 992px) {
   .navbar {
     border-radius: 4px;
   }
 }
-@media (min-width: 768px) {
+@media (min-width: 992px) {
   .navbar-header {
     float: left;
   }
@@ -3666,7 +3666,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 .navbar-collapse.in {
   overflow-y: auto;
 }
-@media (min-width: 768px) {
+@media (min-width: 992px) {
   .navbar-collapse {
     width: auto;
     border-top: 0;
@@ -3695,7 +3695,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   margin-right: -15px;
   margin-left: -15px;
 }
-@media (min-width: 768px) {
+@media (min-width: 992px) {
   .container > .navbar-header,
   .container-fluid > .navbar-header,
   .container > .navbar-collapse,
@@ -3708,7 +3708,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   z-index: 1000;
   border-width: 0 0 1px;
 }
-@media (min-width: 768px) {
+@media (min-width: 992px) {
   .navbar-static-top {
     border-radius: 0;
   }
@@ -3720,7 +3720,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   left: 0;
   z-index: 1030;
 }
-@media (min-width: 768px) {
+@media (min-width: 992px) {
   .navbar-fixed-top,
   .navbar-fixed-bottom {
     border-radius: 0;
@@ -3746,7 +3746,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 .navbar-brand:focus {
   text-decoration: none;
 }
-@media (min-width: 768px) {
+@media (min-width: 992px) {
   .navbar > .container .navbar-brand,
   .navbar > .container-fluid .navbar-brand {
     margin-left: -15px;
@@ -3776,7 +3776,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 .navbar-toggle .icon-bar + .icon-bar {
   margin-top: 4px;
 }
-@media (min-width: 768px) {
+@media (min-width: 992px) {
   .navbar-toggle {
     display: none;
   }
@@ -3789,7 +3789,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   padding-bottom: 10px;
   line-height: 20px;
 }
-@media (max-width: 767px) {
+@media (max-width: 991px) {
   .navbar-nav .open .dropdown-menu {
     position: static;
     float: none;
@@ -3811,7 +3811,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
     background-image: none;
   }
 }
-@media (min-width: 768px) {
+@media (min-width: 992px) {
   .navbar-nav {
     float: left;
     margin: 0;
@@ -3827,7 +3827,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
     margin-right: -15px;
   }
 }
-@media (min-width: 768px) {
+@media (min-width: 992px) {
   .navbar-left {
     float: left !important;
   }
@@ -3878,12 +3878,12 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
     top: 0;
   }
 }
-@media (max-width: 767px) {
+@media (max-width: 991px) {
   .navbar-form .form-group {
     margin-bottom: 5px;
   }
 }
-@media (min-width: 768px) {
+@media (min-width: 992px) {
   .navbar-form {
     width: auto;
     border: 0;
@@ -3923,7 +3923,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   margin-top: 15px;
   margin-bottom: 15px;
 }
-@media (min-width: 768px) {
+@media (min-width: 992px) {
   .navbar-text {
     float: left;
     margin-left: 15px;
@@ -3988,7 +3988,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   background-color: #e7e7e7;
   color: #555555;
 }
-@media (max-width: 767px) {
+@media (max-width: 991px) {
   .navbar-default .navbar-nav .open .dropdown-menu > li > a {
     color: #777777;
   }
@@ -4071,7 +4071,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   background-color: #080808;
   color: #ffffff;
 }
-@media (max-width: 767px) {
+@media (max-width: 991px) {
   .navbar-inverse .navbar-nav .open .dropdown-menu > .dropdown-header {
     border-color: #080808;
   }
@@ -5890,6 +5890,23 @@ ul.list-special-alt li {
     display: none !important;
   }
 }
+@media (max-width: 992px) {
+  .warp.mobile-wrap {
+    margin-bottom: 0;
+  }
+  .warp.mobile-wrap .container {
+    width: 100%;
+  }
+  .warp.mobile-wrap .container .row div {
+    padding: 20px;
+  }
+  .warp.mobile-wrap .container .red {
+    background-color: #e74c3c;
+  }
+  .warp.mobile-wrap .container .red:last-child {
+    padding-bottom: 38px;
+  }
+}
 .warp {
   width: 100%;
   margin-top: 42px;
@@ -5910,6 +5927,55 @@ ul.list-special-alt li {
 .warp-lead {
   margin-top: 60px;
   margin-bottom: 45px;
+}
+@media (max-width: 992px) {
+  .warp-lead {
+    margin-top: 15px;
+    margin-bottom: 15px;
+  }
+}
+@media (max-width: 992px) {
+  .row-menu,
+  tr.row-menu,
+  th.row-menu,
+  td.row-menu {
+    display: none !important;
+  }
+}
+.row-menu-collapse {
+  text-align: center;
+}
+@media (min-width: 992px) {
+  .row-menu-collapse,
+  tr.row-menu-collapse,
+  th.row-menu-collapse,
+  td.row-menu-collapse {
+    display: none !important;
+  }
+}
+.row-menu-collapse img {
+  height: 55px;
+}
+.row-menu-collapse .navbar-toggle {
+  position: absolute;
+  left: 0;
+}
+.row-menu-collapse .navbar-toggle .icon-bar {
+  background-color: #e74c3c;
+  height: 4px;
+  width: 26px;
+  border-bottom-right-radius: 10px;
+  border-bottom-left-radius: 10px;
+  border-top-right-radius: 10px;
+  border-top-left-radius: 10px;
+}
+.row-menu-collapse .nav {
+  font-size: 19px;
+  text-transform: uppercase;
+}
+.row-menu-collapse .nav .active {
+  background-color: #e74c3c;
+  color: #ffffff;
 }
 .menu {
   text-transform: uppercase;
@@ -5936,6 +6002,11 @@ ul.list-special-alt li {
 .menu .active {
   font-weight: bold;
 }
+@media (max-width: 992px) {
+  .menu a {
+    color: #e74c3c;
+  }
+}
 .lead {
   color: #383637;
   font-size: 26.25px;
@@ -5943,6 +6014,14 @@ ul.list-special-alt li {
 }
 .lead strong {
   color: #e74c3c;
+}
+@media (max-width: 992px) {
+  footer .menu,
+  trfooter .menu,
+  thfooter .menu,
+  tdfooter .menu {
+    display: none !important;
+  }
 }
 footer .menu a {
   color: #383637;
@@ -5962,6 +6041,14 @@ footer .contact-info ul {
 footer .contact-info li {
   float: right;
   margin-left: 3%;
+}
+@media (max-width: 992px) {
+  footer.warp {
+    margin-top: 0;
+    padding-top: 42px;
+    background-color: #e74c3c;
+    margin-bottom: 0;
+  }
 }
 article {
   margin-bottom: 10%;
