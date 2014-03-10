@@ -5891,20 +5891,31 @@ ul.list-special-alt li {
   }
 }
 @media (max-width: 992px) {
-  .warp.mobile-wrap {
-    margin-bottom: 0;
+  .row-services div {
+    padding-top: 30px;
+    padding-bottom: 30px;
   }
-  .warp.mobile-wrap .container {
-    width: 100%;
+  .row-services div:last-child {
+    padding-bottom: 10px;
   }
-  .warp.mobile-wrap .container .row div {
-    padding: 20px;
+  .row-services div:first-child {
+    padding-top: 10px;
   }
-  .warp.mobile-wrap .container .red {
-    background-color: #e74c3c;
-  }
-  .warp.mobile-wrap .container .red:last-child {
-    padding-bottom: 38px;
+}
+.half-background-mobile {
+  background-color: #e74c3c;
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 600px;
+  z-index: -1;
+}
+@media (min-width: 992px) {
+  .half-background-mobile,
+  tr.half-background-mobile,
+  th.half-background-mobile,
+  td.half-background-mobile {
+    display: none !important;
   }
 }
 .warp {
