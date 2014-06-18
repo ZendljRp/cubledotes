@@ -23,9 +23,10 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
 """
+from __future__ import unicode_literals
+
 from django.forms import ModelForm, TextInput
 from django.contrib import admin
-
 from suit_redactor.widgets import RedactorWidget
 
 from blog.models import Post
