@@ -23,6 +23,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
 """
+from __future__ import unicode_literals
 from django.conf.urls import patterns, url
 from projects.views import ProjectsListView, ProjectsTagListView, ProjectDetailsView
 

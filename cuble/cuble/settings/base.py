@@ -23,6 +23,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
 """
+from __future__ import unicode_literals
 from os import environ
 from os.path import abspath, basename, dirname, join, normpath
 from sys import path
@@ -323,4 +324,56 @@ THUMBNAIL_ALIASES = {
         'box': {'size': (292, 292), 'crop': 'smart', 'upscale': True, 'quality': 90},
     },
 }
+SOUTH_MIGRATION_MODULES = {
+    'easy_thumbnails': 'easy_thumbnails.south_migrations',
+}
 ########## END EASY THUMBNAILS CONFIGURATION
+
+########## PIPELINE CONFIGURATION
+INSTALLED_APPS += (
+    'pipeline',
+)
+PIPELINE_COMPILERS = (
+    'pipeline.compilers.less.LessCompiler',
+    'pipeline.compilers.coffee.CoffeeScriptCompiler',
+)
+PIPELINE_CSS = {
+    'cuble': {
+        'source_filenames': (
+            'css/cuble.less',
+        ),
+        'output_filename': 'css/cuble.css',
+        'extra_context': {
+            'media': 'screen,projection',
+        },
+    }
+}
+PIPELINE_JS = {
+    'vendor': {
+        'source_filenames': (
+            'vendor/quovolver/jquery.quovolver.js',
+            'vendor/bootstrap/dist/js/bootstrap.js',
+            'vendor/angular/angular.js',
+        ),
+        'output_filename': 'js/vendor.js',
+    },
+    'modernizr': {
+        'source_filenames': (
+            'vendor/modernizr/modernizr.js',
+        ),
+        'output_filename': 'js/modernizr.js',
+    },
+    'cuble': {
+        'source_filenames': (
+            'js/*.coffee',
+        ),
+        'output_filename': 'js/cuble.js'
+    }
+}
+
+PIPELINE_LESS_ARGUMENTS = '-x --yui-compress'
+PIPELINE_JS_COMPRESSOR = 'pipeline.compressors.yuglify.YuglifyCompressor'
+PIPELINE_YUGLIFY_JS_ARGUMENTS = '--terminal'
+
+STATICFILES_STORAGE = 'pipeline.storage.PipelineStorage'
+########## END PIPELINE CONFIGURATION

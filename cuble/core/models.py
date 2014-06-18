@@ -23,11 +23,14 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
 """
+from __future__ import unicode_literals
+
 from django.conf import settings
 from django.utils import timezone
 from django.utils.translation import ugettext as _
 from django.db import models
 from filer.fields.file import FilerFileField
+
 from core.managers import ArticlesManager
 
 

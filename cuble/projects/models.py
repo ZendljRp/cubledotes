@@ -23,6 +23,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
 """
+from __future__ import unicode_literals
 from django.db import models
 from django.utils.text import slugify
 from core.models import AbstractArticle

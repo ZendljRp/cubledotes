@@ -23,7 +23,8 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
 """
-from django.contrib.sites.models import Site
+from __future__ import unicode_literals
+
 from django.contrib.syndication.views import Feed
 from django.core.urlresolvers import reverse
 from django.utils.feedgenerator import Atom1Feed
@@ -31,6 +32,7 @@ from django.utils.safestring import mark_safe
 from django.utils.translation import ugettext as _
 from django.shortcuts import render, get_object_or_404
 from django.views.generic import View
+
 from blog.models import Post, Tag
 
 
