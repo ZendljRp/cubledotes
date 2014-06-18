@@ -1,0 +1,14 @@
+{
+  "name": "quovolver",
+  "homepage": "https://github.com/sebnitu/Quovolver",
+  "version": "2.0.2",
+  "_release": "2.0.2",
+  "_resolution": {
+    "type": "version",
+    "tag": "v2.0.2",
+    "commit": "fc2936c58ac68630b42a363e6f8eb42653f081cf"
+  },
+  "_source": "git://github.com/sebnitu/Quovolver.git",
+  "_target": "*",
+  "_originalSource": "quovolver"
+}
