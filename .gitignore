@@ -3,7 +3,7 @@
 .idea/
 default.db
 .coverage
-cuble/static/vendor
+# cuble/static/vendor
 cuble/static/css/*.css
 cuble/static/js/*.js
 cuble/media
