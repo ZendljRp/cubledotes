@@ -2,7 +2,7 @@
 """
 The MIT License (MIT)
 
-Copyright (c) 2014 Cuble Desarrollo S.L.
+Copyright (c) 2014
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -21,17 +21,31 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
-
 """
 from __future__ import unicode_literals
-from django.conf.urls import patterns, url
-from projects.views import ProjectsListView, ProjectsTagListView, ProjectDetailsView
+from django.core.urlresolvers import reverse
+from django.test import TestCase
+from model_mommy import mommy
 
 
-urlpatterns = patterns(
-    '',
-    url(r'^$', ProjectsListView.as_view(), name="projects"),
-    url(r'^tag/(?P<slug>.+)/$', ProjectsTagListView.as_view(), name="projects_tag"),
-    url(r'^(?P<slug>.+)/$', ProjectDetailsView.as_view(), name="project_details"),
-)
+class ProjectViewTests(TestCase):
+    def setUp(self):
+        self.user_password = "pass"
+        self.user = mommy.make('profiles.User', email='user@example.com')
+        self.user.set_password(self.user_password)
+        self.user.save()
 
+    def test_projects(self):
+        response = self.client.get(reverse('projects'))
+        self.assertEqual(response.status_code, 200)
+
+    def test_project_details(self):
+        project = mommy.make('projects.Project', author=self.user)
+        project.save()
+        response = self.client.get(reverse('project_details', kwargs={'slug': project.slug}))
+        self.assertEqual(response.status_code, 200)
+
+    def test_projects_tag(self):
+        tag = mommy.make('tags.Tag')
+        response = self.client.get(reverse('projects_tag', kwargs={'slug': tag.slug}))
+        self.assertEqual(response.status_code, 200)
