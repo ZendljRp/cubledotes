@@ -3,32 +3,52 @@
 {% load thumbnail %}
 {% load gravatar %}
 <div class="row">
-    <div class="col-md-2">
+    <div class="col-sm-2 hidden-xs">
         <h3><img src="{% gravatar_url post.author.email 100 %}" class="img-responsive img-rounded center-block"/></h3>
-        <p>{% trans "Escrito por" %}:<br />{{ post.author.get_full_name }}</p>
+        <p>{% trans "Escrito por" %}:<br /><strong>{{ post.author.get_full_name }}</strong></p>
         {% if post.author.bio  %}
-        <span class="label label-inverse">{{ post.author.bio }}</span>
+            <span class="label label-inverse">{{ post.author.bio }}</span>
         {% endif %}
         <hr />
         <p>{{ post.created_at|naturalday }}</p>
         <p>
             {% trans "Etiquetas" %}:<br/>
-            <ul class="list-special-alt">
-                {% for tag in post.tags.all %}
-                    <li><a href="{% url "posts_tag" slug=tag.slug %}">{{ tag.name }}</a></li>
-                {% endfor %}
-            </ul>
+        <ul class="list-special-alt">
+            {% for tag in post.tags.all %}
+                <li><a href="{% url "posts_tag" slug=tag.slug %}">{{ tag.name }}</a></li>
+            {% endfor %}
+        </ul>
         </p>
     </div>
-    <div class="col-md-10">
+    <div class="col-sm-10">
         <article id="post-{{ post.pk }}">
             <a href="{% url "post" slug=post.slug %}"><h3>{{ post.title }}</h3></a>
             <p class="outstanding-image"><img src="{{ post.outstanding_image|thumbnail_url:"outstanding" }}" class="img-responsive center-block"></p>
             {% if summary %}
-            <p>{{ post.summary|safe }}</p>
+                <p>{{ post.summary|safe }}</p>
             {% else %}
-            <p>{{ post.content|safe }}</p>
+                <p>{{ post.content|safe }}</p>
             {% endif %}
         </article>
+    </div>
+    <div class="col-xs-12 visible-xs">
+        <div class="row">
+            <div class="col-xs-6">
+                <img src="{% gravatar_url post.author.email 100 %}" class="img-responsive img-rounded center-block"/>
+            </div>
+            <div class="col-xs-6">
+                <p>
+                    {% trans "Escrito por" %}: <br/>
+                    <strong>{{ post.author.get_full_name }}</strong>
+                </p>
+                {% if post.author.bio  %}
+                    <span class="label label-inverse">{{ post.author.bio }}</span>
+                {% else %}
+                    <span>&nbsp;</span>
+                {% endif %}
+                <p>{{ post.created_at|naturalday }}</p>
+            </div>
+        </div>
+        <hr />
     </div>
 </div>
