@@ -8,7 +8,7 @@ install:
   - "pip install --quiet coveralls"
   - "pip install --quiet -r requirements/local.txt"
 
-script: sh -c 'cd cuble' && coverage run ./manage.py test --settings=cuble.settings.test
+script: coverage run ./manage.py test cuble/ --settings=cuble.settings.test
 
 after_success:
   - coveralls
