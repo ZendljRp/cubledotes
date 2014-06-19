@@ -25,12 +25,13 @@ THE SOFTWARE.
 """
 from __future__ import unicode_literals
 from django.conf.urls import patterns, url
-from projects.views import ProjectsListView, ProjectsTagListView, ProjectDetailsView
+from projects.views import ProjectsListView, ProjectsTagListView, ProjectDetailsView, NewBudget
 
 
 urlpatterns = patterns(
     '',
     url(r'^$', ProjectsListView.as_view(), name="projects"),
+    url(r'^budget/new/$', NewBudget.as_view(), name="new_budget"),
     url(r'^tag/(?P<slug>.+)/$', ProjectsTagListView.as_view(), name="projects_tag"),
     url(r'^(?P<slug>.+)/$', ProjectDetailsView.as_view(), name="project_details"),
 )

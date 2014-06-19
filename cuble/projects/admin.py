@@ -28,10 +28,12 @@ from django.forms import ModelForm, TextInput
 from django.contrib import admin
 
 from suit_redactor.widgets import RedactorWidget
-from projects.models import Project
+from projects.models import Project, Budget
 
 
 class ProjectForm(ModelForm):
+    """
+    """
 
     class Meta:
         widgets = {
@@ -41,6 +43,9 @@ class ProjectForm(ModelForm):
 
 
 class ProjectAdmin(admin.ModelAdmin):
+    """
+    """
+
     list_display = ['id', 'title', 'created_at', 'status']
     list_filter = ('status', )
     form = ProjectForm
@@ -52,4 +57,12 @@ class ProjectAdmin(admin.ModelAdmin):
     ]
 
 
+class BudgetAdmin(admin.ModelAdmin):
+    """
+    """
+
+    list_display = ['id', 'name', 'email', 'title']
+
+
 admin.site.register(Project, ProjectAdmin)
+admin.site.register(Budget, BudgetAdmin)
