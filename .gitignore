@@ -7,3 +7,4 @@ default.db
 cuble/static/css/*.css
 cuble/static/js/*.js
 cuble/media
+cuble/assets
