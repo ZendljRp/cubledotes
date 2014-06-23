@@ -4,7 +4,7 @@
 {% load thumbnail %}
 
 {% block main_content %}
-    <div class="row project-header">
+    <header class="row project-header">
         <div class="col-md-5">
             <h2 class="black">{{ project.title }}</h2>
             <p>
@@ -18,10 +18,12 @@
         <div class="col-md-7">
             <img src="{{ project.outstanding_image|thumbnail_url:"outstanding" }}" class="img-responsive">
         </div>
-    </div>
-    <div class="row">
+    </header>
+    <article class="row">
         <div class="col-md-12">
-            {{ project.content|safe }}
+            <div class="project-content">
+                {{ project.content|safe }}
+            </div>
         </div>
-    </div>
+    </article>
 {% endblock %}
