@@ -97,7 +97,6 @@ class BudgetForm(ModelForm):
                 'web_design',
                 'web_design_stage',
                 'responsive_web_design',
-                'responsive_web_design',
             ),
             Fieldset(
                 _('<span>&gt; 5</span> Presupuesto'),

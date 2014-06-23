@@ -28,6 +28,7 @@ from __future__ import unicode_literals
 from django.db import models
 from django.utils.text import slugify
 from django.utils.translation import ugettext as _
+from filer.fields.file import FilerFileField
 from core.files import readable_name_to_path
 
 from core.models import AbstractArticle
@@ -41,8 +42,18 @@ class Project(AbstractArticle):
     description = models.TextField(null=True)
     tags = models.ManyToManyField(Tag, related_name="projects")
 
+    thumbnail_image = FilerFileField(related_name="projects", null=True, blank=True)
+
     def __unicode__(self):
         return self.title
+
+    def thumbnail(self):
+        """
+        @return:
+        """
+        if self.thumbnail_image is None:
+            return self.outstanding_image
+        return self.thumbnail_image
 
     def save(self, *args, **kwargs):
         """
@@ -106,34 +117,66 @@ class Budget(models.Model):
     company = models.CharField(verbose_name=_("Empresa"), max_length=128, null=True, blank=True)
 
     title = models.CharField(verbose_name=_("Nombre del proyecto"), max_length=128)
-    stage = models.IntegerField(verbose_name=_("Etapa del proyecto"), choices=STAGE_CHOICES)
-    type = models.IntegerField(verbose_name=_("Tipo de proyecto"), choices=PROJECT_TYPE_CHOICES)
+    stage = models.IntegerField(
+        verbose_name=_("Etapa del proyecto"),
+        choices=STAGE_CHOICES,
+        default=NEW_PROJECT
+    )
+    type = models.IntegerField(
+        verbose_name=_("Tipo de proyecto"),
+        choices=PROJECT_TYPE_CHOICES,
+        default=TYPE_WEB
+    )
     other_type = models.CharField(
         verbose_name=_("En caso de ser otro tipo de proyecto, especifica cual"),
         max_length=128,
         null=True,
         blank=True
     )
-    about = models.TextField(verbose_name=_("Acerca del proyecto (en que consiste, a quién va dirigido, etc.)"))
+    about = models.TextField(
+        verbose_name=_("Acerca del proyecto (en que consiste, a quién va dirigido, etc.)"),
+    )
 
-    hosting = models.BooleanField(verbose_name=_("¿Ya tienes hosting?"))
-    hosting_assistance = models.BooleanField(verbose_name=_("¿Necesitas asesoramiento para contratar el hosting?"))
-    hosting_type = models.IntegerField(verbose_name=_("¿Que hosting quieres contratar?"), choices=HOSTING_CHOICES)
+    hosting = models.BooleanField(verbose_name=_("¿Ya tienes hosting?"), default=False)
+    hosting_assistance = models.BooleanField(verbose_name=_("¿Necesitas asesoramiento para contratar el hosting?"),
+                                             default=False)
+    hosting_type = models.IntegerField(
+        verbose_name=_("¿Que hosting quieres contratar?"),
+        choices=HOSTING_CHOICES,
+        default=DONT_KNOW,
+        blank=True
+    )
     hosting_quotes = models.CharField(
         verbose_name=_("¿Cuál es tu presupuesto mensual para el hosting?"),
         max_length=128,
-        choices=HOSTING_QUOTES_CHOICES
+        choices=HOSTING_QUOTES_CHOICES,
+        null=True,
+        blank=True
     )
 
-    branding_design = models.BooleanField(verbose_name=_("¿Necesitas que diseñemos tu identidad corporativa?"))
-    branding_design_about = models.TextField(
-        verbose_name=_("Hablanos un poco sobre el diseño de identidad que quieres para el proyecto")
+    branding_design = models.BooleanField(
+        verbose_name=_("¿Necesitas que diseñemos tu identidad corporativa?"),
+        default=True
     )
-    web_design = models.BooleanField(verbose_name=_("¿Necesitas que diseñemos tu sitio web?"))
-    web_design_stage = models.IntegerField(verbose_name=_("Etapa del diseño"), choices=DESIGN_STAGE_CHOICES)
+    branding_design_about = models.TextField(
+        verbose_name=_("Hablanos un poco sobre el diseño de identidad que quieres para el proyecto"),
+        default="",
+        blank=True,
+    )
+    web_design = models.BooleanField(
+        verbose_name=_("¿Necesitas que diseñemos tu sitio web?"),
+        default=True
+    )
+    web_design_stage = models.IntegerField(
+        verbose_name=_("Etapa del diseño"),
+        choices=DESIGN_STAGE_CHOICES,
+        default=NEW_DESIGN,
+        blank=True
+    )
     responsive_web_design = models.NullBooleanField(
         verbose_name=_("¿Necesitas diseño responsive para tu sitio web?"),
-        null=True
+        null=True,
+        blank=True
     )
 
     badget = models.CharField(
