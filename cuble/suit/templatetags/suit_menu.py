@@ -1,7 +1,15 @@
 from django import template
 from django.contrib import admin
+from django.contrib.admin import AdminSite
 from django.core.handlers.wsgi import WSGIRequest
-from django.core.urlresolvers import reverse
+from django.core.urlresolvers import reverse, resolve
+
+try:
+    from django.utils.six import string_types
+except ImportError:
+    # For Django < 1.4.2
+    string_types = basestring,
+
 import warnings
 from suit.config import get_config
 
@@ -17,13 +25,29 @@ def get_menu(context, request):
         return None
 
     # Try to get app list
-    template_response = admin.site.index(request)
+    template_response = get_admin_site(context.current_app).index(request)
     try:
         app_list = template_response.context_data['app_list']
     except Exception:
         return
 
     return Menu(context, request, app_list).get_app_list()
+
+
+def get_admin_site(current_app):
+    """
+    Method tries to get actual admin.site class, if any custom admin sites
+    were used. Couldn't find any other references to actual class other than
+    in func_closer dict in index() func returned by resolver.
+    """
+    try:
+        resolver_match = resolve(reverse('%s:index' % current_app))
+        for func_closure in resolver_match.func.func_closure:
+            if isinstance(func_closure.cell_contents, AdminSite):
+                return func_closure.cell_contents
+    except:
+        pass
+    return admin.site
 
 
 class Menu(object):
@@ -90,7 +114,7 @@ class Menu(object):
     def make_app(self, app_def):
         if isinstance(app_def, dict):
             app = app_def.copy()
-        elif isinstance(app_def, str):
+        elif isinstance(app_def, string_types):
             if app_def == '-':
                 app = self.make_separator()
             else:
@@ -229,7 +253,7 @@ class Menu(object):
     def make_model(self, model_def, app_name):
         if isinstance(model_def, dict):
             model = model_def.copy()
-        elif isinstance(model_def, str):
+        elif isinstance(model_def, string_types):
             model = self.make_model_from_native(model_def, app_name)
         else:
             raise TypeError('MENU list item must be string or dict. Got %s'
@@ -430,7 +454,7 @@ class Menu(object):
             if isinstance(order, (tuple, list)):
                 app_name = order[0]
                 models_order = order[1] if len(order) > 1 else None
-                if isinstance(app_name, str):
+                if isinstance(app_name, string_types):
                     new_app['app'] = app_name
                 elif isinstance(app_name, (tuple, list)):
                     mapping = ('label', 'url', 'icon', 'permissions')
@@ -439,7 +463,7 @@ class Menu(object):
                 if models_order and isinstance(models_order, (tuple, list)):
                     models = []
                     for model in models_order:
-                        if isinstance(model, str):
+                        if isinstance(model, string_types):
                             models.append({'model': model})
                         elif isinstance(model, (list, tuple)):
                             mapping = ('label', 'url', 'permissions')
