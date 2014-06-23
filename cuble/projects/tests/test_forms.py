@@ -2,7 +2,7 @@
 """
 The MIT License (MIT)
 
-Copyright (c) 2014 Cuble Desarrollo S.L.
+Copyright (c) 2014
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -21,48 +21,37 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
-
 """
 from __future__ import unicode_literals
-from django.forms import ModelForm, TextInput
-from django.contrib import admin
 
-from suit_redactor.widgets import RedactorWidget
-from projects.models import Project, Budget
+from django.utils.unittest.case import TestCase
+from model_mommy import mommy
+
+from projects.forms import BudgetForm
+from projects.models import Budget
 
 
-class ProjectForm(ModelForm):
-    """
-    """
+class FormsTests(TestCase):
+    def setUp(self):
+        self.user_password = "pass"
+        self.user = mommy.make('profiles.User', email='user@example.com')
+        self.user.set_password(self.user_password)
+        self.user.save()
 
-    class Meta:
-        widgets = {
-            'title': TextInput(),
-            'content': RedactorWidget(editor_options={"minHeight": 500})
+    def test_new_budget_form(self):
+        prev_budgets = Budget.objects.all().count()
+        data = {
+            "name": "Test project",
+            "email": "test@example.com",
+            "title": "title",
+            "stage": Budget.NEW_PROJECT,
+            "type": Budget.TYPE_WEB,
+            "about": "About",
+            "hosting_type": Budget.DONT_KNOW,
+            "web_design_stage": Budget.NEW_DESIGN,
+            "badget": "2000-4000",
         }
-
-
-class ProjectAdmin(admin.ModelAdmin):
-    """
-    """
-
-    list_display = ['id', 'title', 'created_at', 'status']
-    list_filter = ('status', )
-    form = ProjectForm
-    fieldsets = [
-        (None, {'fields': ('title', 'slug', 'author', 'status', 'outstanding_image')}),
-        ('Dates', {'fields': ('created_at', 'scheduled_at',)}),
-        ('Meta', {'fields': ('tags', 'description')}),
-        ('Content', {'classes': ('full-width',), 'fields': ('content',)}),
-    ]
-
-
-class BudgetAdmin(admin.ModelAdmin):
-    """
-    """
-
-    list_display = ['id', 'name', 'email', 'title']
-
-
-admin.site.register(Project, ProjectAdmin)
-admin.site.register(Budget, BudgetAdmin)
+        form = BudgetForm(data)
+        self.assertTrue(form.is_valid())
+        form.save()
+        self.assertEquals(Budget.objects.all().count(), prev_budgets + 1)

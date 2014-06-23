@@ -377,3 +377,16 @@ PIPELINE_YUGLIFY_JS_ARGUMENTS = '--terminal'
 
 STATICFILES_STORAGE = 'pipeline.storage.PipelineStorage'
 ########## END PIPELINE CONFIGURATION
+
+########## CRISPY CONFIGURATION
+INSTALLED_APPS += (
+    'crispy_forms',
+)
+CRISPY_TEMPLATE_PACK = 'bootstrap3'
+########## END CRISPY CONFIGURATION
+
+########## FLOPPYFORMS CONFIGURATION
+INSTALLED_APPS += (
+    'floppyforms',
+)
+########## END FLOPPYFORMS CONFIGURATION

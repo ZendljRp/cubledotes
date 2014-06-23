@@ -2,7 +2,7 @@
 """
 The MIT License (MIT)
 
-Copyright (c) 2014 Cuble Desarrollo S.L.
+Copyright (c) 2014
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -21,48 +21,39 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
-
 """
 from __future__ import unicode_literals
-from django.forms import ModelForm, TextInput
-from django.contrib import admin
 
-from suit_redactor.widgets import RedactorWidget
-from projects.models import Project, Budget
+from django.test import TestCase
+
+from core.files import readable_name_to_path, name_to_path
 
 
-class ProjectForm(ModelForm):
+class Dummy(object):
+    def __init__(self):
+        pass
+
+
+class FilesTests(TestCase):
     """
     """
 
-    class Meta:
-        widgets = {
-            'title': TextInput(),
-            'content': RedactorWidget(editor_options={"minHeight": 500})
-        }
+    def test_readable_name_to_path(self):
+        """
 
+        @return:
+        """
+        func = readable_name_to_path('test')
+        self.assertTrue(callable(func))
+        result = func(Dummy(), 'test.png')
+        self.assertEquals(result, 'test/test.png')
 
-class ProjectAdmin(admin.ModelAdmin):
-    """
-    """
+    def test_name_to_path(self):
+        """
 
-    list_display = ['id', 'title', 'created_at', 'status']
-    list_filter = ('status', )
-    form = ProjectForm
-    fieldsets = [
-        (None, {'fields': ('title', 'slug', 'author', 'status', 'outstanding_image')}),
-        ('Dates', {'fields': ('created_at', 'scheduled_at',)}),
-        ('Meta', {'fields': ('tags', 'description')}),
-        ('Content', {'classes': ('full-width',), 'fields': ('content',)}),
-    ]
-
-
-class BudgetAdmin(admin.ModelAdmin):
-    """
-    """
-
-    list_display = ['id', 'name', 'email', 'title']
-
-
-admin.site.register(Project, ProjectAdmin)
-admin.site.register(Budget, BudgetAdmin)
+        @return:
+        """
+        func = name_to_path('test')
+        self.assertTrue(callable(func))
+        result = func(Dummy(), 'test.png')
+        self.assertRegexpMatches(result, r'test/.+\.png')

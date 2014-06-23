@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block claim_content %}
+    <h2>{% trans "Cuestionario para un nuevo proyecto" %}</h2>
+{% endblock %}
+
+{% block main %}
+    <div class="warp-white">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <p>{% trans "Rellena el siguiente cuestionario" %}</p>
+                    {% crispy budget_form %}
+                    <hr />
+                    <p>{% trans "¡Has terminado! Muchas gracias por tu tiempo" %}</p>
+                    <button type="submit" class="btn btn-primary btn-lg">{% trans "Enviar" %}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock main %}

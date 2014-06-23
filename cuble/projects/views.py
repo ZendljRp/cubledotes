@@ -27,6 +27,7 @@ from __future__ import unicode_literals
 from django.shortcuts import render, get_object_or_404
 from django.views.generic import View
 from blog.models import Post, Tag
+from projects.forms import BudgetForm
 from projects.models import Project
 
 
@@ -78,3 +79,18 @@ class ProjectDetailsView(View):
         """
         project = get_object_or_404(Project, slug=slug)
         return render(request, "projects/details.html", {"project": project})
+
+
+class NewBudget(View):
+    """
+    View for showing and handling budget form.
+    """
+
+    def get(self, request):
+        """
+
+        @param request:
+        @return:
+        """
+        budget_form = BudgetForm()
+        return render(request, "projects/budgets/create.html", {"budget_form": budget_form})

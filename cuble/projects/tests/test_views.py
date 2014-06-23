@@ -26,6 +26,7 @@ from __future__ import unicode_literals
 from django.core.urlresolvers import reverse
 from django.test import TestCase
 from model_mommy import mommy
+from projects.models import Project
 
 
 class ProjectViewTests(TestCase):
@@ -36,16 +37,21 @@ class ProjectViewTests(TestCase):
         self.user.save()
 
     def test_projects(self):
+        mommy.make('projects.Project', author=self.user, status=Project.PUBLISHED, _quantity=10)
         response = self.client.get(reverse('projects'))
         self.assertEqual(response.status_code, 200)
 
     def test_project_details(self):
-        project = mommy.make('projects.Project', author=self.user)
+        project = mommy.make('projects.Project', status=Project.PUBLISHED, author=self.user)
         project.save()
-        response = self.client.get(reverse('project_details', kwargs={'slug': project.slug}))
+        response = self.client.get(reverse('project', kwargs={'slug': project.slug}))
         self.assertEqual(response.status_code, 200)
 
     def test_projects_tag(self):
         tag = mommy.make('tags.Tag')
         response = self.client.get(reverse('projects_tag', kwargs={'slug': tag.slug}))
+        self.assertEqual(response.status_code, 200)
+
+    def test_budget_form(self):
+        response = self.client.get(reverse('new_budget'))
         self.assertEqual(response.status_code, 200)

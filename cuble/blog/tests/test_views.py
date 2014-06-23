@@ -44,18 +44,21 @@ class BlogViewTests(TestCase):
         )
 
     def test_blog(self):
+        mommy.make('blog.Post', author=self.user, _quantity=5)
         response = self.client.get(reverse('blog'))
         self.assertEqual(response.status_code, 200)
 
     def test_blog_feed(self):
+        mommy.make('blog.Post', author=self.user, _quantity=5)
         response = self.client.get(reverse('blog_feed'))
         self.assertEqual(response.status_code, 200)
 
     def test_blog_atom(self):
+        mommy.make('blog.Post', author=self.user, _quantity=5)
         response = self.client.get(reverse('blog_atom'))
         self.assertEqual(response.status_code, 200)
 
     def test_blog_details(self):
-        post = Post.objects.create(author=self.user, title="Title", slug="slug")
+        post = Post.objects.create(author=self.user, title="Title", slug="slug", status=Post.PUBLISHED)
         response = self.client.get(reverse('post', kwargs={'slug': post.slug}))
         self.assertEqual(response.status_code, 200)

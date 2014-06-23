@@ -2,7 +2,7 @@
 """
 The MIT License (MIT)
 
-Copyright (c) 2014 Cuble Desarrollo S.L.
+Copyright (c) 2014
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -21,48 +21,5 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
-
 """
 from __future__ import unicode_literals
-from django.forms import ModelForm, TextInput
-from django.contrib import admin
-
-from suit_redactor.widgets import RedactorWidget
-from projects.models import Project, Budget
-
-
-class ProjectForm(ModelForm):
-    """
-    """
-
-    class Meta:
-        widgets = {
-            'title': TextInput(),
-            'content': RedactorWidget(editor_options={"minHeight": 500})
-        }
-
-
-class ProjectAdmin(admin.ModelAdmin):
-    """
-    """
-
-    list_display = ['id', 'title', 'created_at', 'status']
-    list_filter = ('status', )
-    form = ProjectForm
-    fieldsets = [
-        (None, {'fields': ('title', 'slug', 'author', 'status', 'outstanding_image')}),
-        ('Dates', {'fields': ('created_at', 'scheduled_at',)}),
-        ('Meta', {'fields': ('tags', 'description')}),
-        ('Content', {'classes': ('full-width',), 'fields': ('content',)}),
-    ]
-
-
-class BudgetAdmin(admin.ModelAdmin):
-    """
-    """
-
-    list_display = ['id', 'name', 'email', 'title']
-
-
-admin.site.register(Project, ProjectAdmin)
-admin.site.register(Budget, BudgetAdmin)

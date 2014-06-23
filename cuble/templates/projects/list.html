@@ -11,7 +11,7 @@
     <div class="row">
     {% for project in projects %}
         <div class="col-md-3">
-            <p><img src="{{ project.outstanding_image|thumbnail_url:'box' }}"  class="img-responsive" /></p>
+            <p><img src="{{ project.thumbnail|thumbnail_url:'box' }}"  class="img-responsive" /></p>
             <a href="{% url "project" slug=project.slug %}"><h3>{{ project.title }}</h3></a>
             <p>{{ project.description }}</p>
         </div>
