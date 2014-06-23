@@ -278,3 +278,21 @@ article h3:first-child {
     margin-right: 3% !important;
   }
 }
+.project-content {
+  @media (min-width: @screen-md-min) and (max-width: @screen-md-max) {
+    -moz-column-count: 2;
+    -moz-column-gap: 30px;
+    -webkit-column-count: 2;
+    -webkit-column-gap: 30px;
+    column-count: 2;
+    column-gap: 30px;
+  }
+  @media (min-width: @screen-lg-min) {
+    -moz-column-count: 3;
+    -moz-column-gap: 30px;
+    -webkit-column-count: 3;
+    -webkit-column-gap: 30px;
+    column-count: 3;
+    column-gap: 30px;
+  }
+}
