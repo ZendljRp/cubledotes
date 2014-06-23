@@ -50,7 +50,7 @@ class ProjectAdmin(admin.ModelAdmin):
     list_filter = ('status', )
     form = ProjectForm
     fieldsets = [
-        (None, {'fields': ('title', 'slug', 'author', 'status', 'outstanding_image')}),
+        (None, {'fields': ('title', 'slug', 'author', 'status', 'outstanding_image', 'thumbnail_image')}),
         ('Dates', {'fields': ('created_at', 'scheduled_at',)}),
         ('Meta', {'fields': ('tags', 'description')}),
         ('Content', {'classes': ('full-width',), 'fields': ('content',)}),
