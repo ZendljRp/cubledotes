@@ -26,7 +26,6 @@ THE SOFTWARE.
 from __future__ import unicode_literals
 from cuble.settings.base import *
 
-
 ########## DATABASE CONFIGURATION
 # In-memory configuration
 DATABASES = {

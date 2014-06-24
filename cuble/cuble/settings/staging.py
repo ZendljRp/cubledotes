@@ -29,7 +29,7 @@ from cuble.settings.base import *
 
 ########## DEBUG CONFIGURATION
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#debug
-DEBUG = False
+DEBUG = True  # FIXME Bug with Suit https://github.com/stefanfoulis/django-filer/issues/390
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#template-debug
 TEMPLATE_DEBUG = DEBUG
