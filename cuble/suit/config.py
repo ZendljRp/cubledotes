@@ -71,5 +71,5 @@ def setup_filer():
     ensure_meta_widgets(FileAdminChangeFrom.Meta)
 
 
-if 'filer' in settings.INSTALLED_APPS:
-    setup_filer()
+# if 'filer' in settings.INSTALLED_APPS:
+#     setup_filer()
