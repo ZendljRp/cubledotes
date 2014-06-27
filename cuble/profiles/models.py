@@ -34,3 +34,11 @@ class User(AbstractUser):
     Cuble user.
     """
     bio = models.TextField(_("Description"), null=True, blank=True)
+
+    # Skills
+    strength = models.PositiveIntegerField(verbose_name=_("Programming Python/Django"), default=1)
+    dexterity = models.PositiveIntegerField(verbose_name=_("Programming Javascript/HTML5/CSS3"), default=1)
+    constitution = models.PositiveIntegerField(verbose_name=_("Server Architecture"), default=1)
+    intelligence = models.PositiveIntegerField(verbose_name=_("Software Design and Theory"), default=1)
+    wisdom = models.PositiveIntegerField(verbose_name=_("Data Bases"), default=1)
+    charisma = models.PositiveIntegerField(verbose_name=_("Management"), default=1)
