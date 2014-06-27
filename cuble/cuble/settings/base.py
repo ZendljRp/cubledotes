@@ -240,7 +240,6 @@ THIRD_PARTY_APPS = (
     'easy_thumbnails',
     'django_gravatar',
     'mptt',
-    'storages',
     'filer',
 )
 

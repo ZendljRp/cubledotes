@@ -38,7 +38,7 @@ admin.autodiscover()
 urlpatterns = patterns(
     '',
     url(r'^$', LandingView.as_view(), name="landing"),
-
+    url(r'^team/', include('profiles.urls', namespace="profiles"), name="profiles"),
     url(r'^services/', ServicesView.as_view(), name="services"),
     url(r'^contact/', ContactView.as_view(), name="contact"),
     url(r'^blog/', include('blog.urls')),

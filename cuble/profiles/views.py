@@ -23,14 +23,21 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 """
 from __future__ import unicode_literals
-from django.core.urlresolvers import reverse
-from django.test import TestCase
-from model_mommy import mommy
+from django.shortcuts import render
+from django.views.generic import View
+from profiles.models import User
 
 
-class TeamViewTests(TestCase):
+class TeamView(View):
+    """
+    View for team.
+    """
 
-    def test_team(self):
-        mommy.make('profiles.User', _quantity=5)
-        response = self.client.get(reverse('profiles:team'))
-        self.assertEqual(response.status_code, 200)
+    @staticmethod
+    def get(request):
+        """
+        @param request:
+        @return:
+        """
+        team = User.objects.exclude(username="admin")
+        return render(request, "profiles/team.html", {"team": team})

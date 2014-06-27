@@ -2,7 +2,7 @@
 """
 The MIT License (MIT)
 
-Copyright (c) 2014
+Copyright (c) 2014 Cuble Desarrollo S.L.
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -21,16 +21,20 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
+
 """
 from __future__ import unicode_literals
-from django.core.urlresolvers import reverse
-from django.test import TestCase
-from model_mommy import mommy
+
+from django.conf.urls import patterns, url
+from django.core.urlresolvers import reverse_lazy
+from django.views.generic import RedirectView
+
+from blog.views import PostsListView, PostDetailsView, PostsTagListView, PostsFeed, PostsAtomFeed
+from profiles.views import TeamView
 
 
-class TeamViewTests(TestCase):
+urlpatterns = patterns(
+    '',
+    url(r'^$', TeamView.as_view(), name="team"),
+)
 
-    def test_team(self):
-        mommy.make('profiles.User', _quantity=5)
-        response = self.client.get(reverse('profiles:team'))
-        self.assertEqual(response.status_code, 200)
