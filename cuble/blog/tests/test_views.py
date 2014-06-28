@@ -36,16 +36,15 @@ class BlogViewTests(TestCase):
         self.user.set_password(self.user_password)
         self.user.save()
 
-    def _authenticate(self):
-        self.client.login(
-            email='user@example.com',
-            password=self.user_password,
-            is_validate=True,
-        )
-
     def test_blog(self):
         mommy.make('blog.Post', author=self.user, _quantity=5)
         response = self.client.get(reverse('blog'))
+        self.assertEqual(response.status_code, 200)
+
+    def test_blog_tags(self):
+        tag = mommy.make('tags.Tag')
+        mommy.make('blog.Post', author=self.user, tags=[tag], _quantity=5)
+        response = self.client.get(reverse('posts_tag', kwargs={'slug': tag.slug}))
         self.assertEqual(response.status_code, 200)
 
     def test_blog_feed(self):
