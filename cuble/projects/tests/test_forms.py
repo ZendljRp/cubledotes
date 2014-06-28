@@ -23,8 +23,8 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 """
 from __future__ import unicode_literals
+from django.test import TestCase
 
-from django.utils.unittest.case import TestCase
 from model_mommy import mommy
 
 from projects.forms import BudgetForm
@@ -54,4 +54,4 @@ class FormsTests(TestCase):
         form = BudgetForm(data)
         self.assertTrue(form.is_valid())
         form.save()
-        self.assertEquals(Budget.objects.all().count(), prev_budgets + 1)
+        self.assertEqual(Budget.objects.all().count(), prev_budgets + 1)

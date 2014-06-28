@@ -46,7 +46,7 @@ class FilesTests(TestCase):
         func = readable_name_to_path('test')
         self.assertTrue(callable(func))
         result = func(Dummy(), 'test.png')
-        self.assertEquals(result, 'test/test.png')
+        self.assertEqual(result, 'test/test.png')
 
     def test_name_to_path(self):
         """
@@ -56,4 +56,4 @@ class FilesTests(TestCase):
         func = name_to_path('test')
         self.assertTrue(callable(func))
         result = func(Dummy(), 'test.png')
-        self.assertRegexpMatches(result, r'test/.+\.png')
+        self.assertRegex(result, r'test/.+\.png')

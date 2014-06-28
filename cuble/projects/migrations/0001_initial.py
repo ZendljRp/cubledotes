@@ -9,122 +9,152 @@ class Migration(SchemaMigration):
 
     def forwards(self, orm):
         # Adding model 'Project'
-        db.create_table(u'projects_project', (
-            (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
+        db.create_table('projects_project', (
+            ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
             ('status', self.gf('django.db.models.fields.PositiveIntegerField')(default=0)),
             ('author', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['profiles.User'])),
             ('title', self.gf('django.db.models.fields.TextField')()),
             ('slug', self.gf('django.db.models.fields.SlugField')(unique=True, max_length=50, blank=True)),
             ('content', self.gf('django.db.models.fields.TextField')(null=True, blank=True)),
-            ('created_at', self.gf('django.db.models.fields.DateTimeField')(default=datetime.datetime(2014, 2, 13, 0, 0))),
+            ('created_at', self.gf('django.db.models.fields.DateTimeField')(default=datetime.datetime(2014, 6, 28, 0, 0))),
             ('scheduled_at', self.gf('django.db.models.fields.DateTimeField')(null=True, blank=True)),
-            ('outstanding_image', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['filer.File'], null=True, blank=True)),
+            ('outstanding_image', self.gf('django.db.models.fields.files.ImageField')(blank=True, null=True, max_length=100)),
+            ('description', self.gf('django.db.models.fields.TextField')(null=True)),
+            ('thumbnail_image', self.gf('django.db.models.fields.files.ImageField')(blank=True, null=True, max_length=100)),
         ))
-        db.send_create_signal(u'projects', ['Project'])
+        db.send_create_signal('projects', ['Project'])
 
         # Adding M2M table for field tags on 'Project'
-        m2m_table_name = db.shorten_name(u'projects_project_tags')
+        m2m_table_name = db.shorten_name('projects_project_tags')
         db.create_table(m2m_table_name, (
             ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True)),
-            ('project', models.ForeignKey(orm[u'projects.project'], null=False)),
-            ('tag', models.ForeignKey(orm[u'tags.tag'], null=False))
+            ('project', models.ForeignKey(orm['projects.project'], null=False)),
+            ('tag', models.ForeignKey(orm['tags.tag'], null=False))
         ))
         db.create_unique(m2m_table_name, ['project_id', 'tag_id'])
+
+        # Adding model 'Budget'
+        db.create_table('projects_budget', (
+            ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
+            ('name', self.gf('django.db.models.fields.CharField')(max_length=128)),
+            ('email', self.gf('django.db.models.fields.EmailField')(max_length=75)),
+            ('company', self.gf('django.db.models.fields.CharField')(blank=True, null=True, max_length=128)),
+            ('title', self.gf('django.db.models.fields.CharField')(max_length=128)),
+            ('stage', self.gf('django.db.models.fields.IntegerField')(default=0)),
+            ('type', self.gf('django.db.models.fields.IntegerField')(default=1)),
+            ('other_type', self.gf('django.db.models.fields.CharField')(blank=True, null=True, max_length=128)),
+            ('about', self.gf('django.db.models.fields.TextField')()),
+            ('hosting', self.gf('django.db.models.fields.BooleanField')(default=False)),
+            ('hosting_assistance', self.gf('django.db.models.fields.BooleanField')(default=False)),
+            ('hosting_type', self.gf('django.db.models.fields.IntegerField')(blank=True, default=3)),
+            ('hosting_quotes', self.gf('django.db.models.fields.CharField')(blank=True, null=True, max_length=128)),
+            ('branding_design', self.gf('django.db.models.fields.BooleanField')(default=True)),
+            ('branding_design_about', self.gf('django.db.models.fields.TextField')(blank=True, default='')),
+            ('web_design', self.gf('django.db.models.fields.BooleanField')(default=True)),
+            ('web_design_stage', self.gf('django.db.models.fields.IntegerField')(blank=True, default=0)),
+            ('responsive_web_design', self.gf('django.db.models.fields.NullBooleanField')(null=True, blank=True)),
+            ('badget', self.gf('django.db.models.fields.CharField')(max_length=128)),
+            ('badget_file', self.gf('django.db.models.fields.files.FileField')(blank=True, null=True, max_length=100)),
+        ))
+        db.send_create_signal('projects', ['Budget'])
 
 
     def backwards(self, orm):
         # Deleting model 'Project'
-        db.delete_table(u'projects_project')
+        db.delete_table('projects_project')
 
         # Removing M2M table for field tags on 'Project'
-        db.delete_table(db.shorten_name(u'projects_project_tags'))
+        db.delete_table(db.shorten_name('projects_project_tags'))
+
+        # Deleting model 'Budget'
+        db.delete_table('projects_budget')
 
 
     models = {
-        u'auth.group': {
+        'auth.group': {
             'Meta': {'object_name': 'Group'},
-            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'name': ('django.db.models.fields.CharField', [], {'unique': 'True', 'max_length': '80'}),
-            'permissions': ('django.db.models.fields.related.ManyToManyField', [], {'to': u"orm['auth.Permission']", 'symmetrical': 'False', 'blank': 'True'})
+            'permissions': ('django.db.models.fields.related.ManyToManyField', [], {'symmetrical': 'False', 'to': "orm['auth.Permission']", 'blank': 'True'})
         },
-        u'auth.permission': {
-            'Meta': {'ordering': "(u'content_type__app_label', u'content_type__model', u'codename')", 'unique_together': "((u'content_type', u'codename'),)", 'object_name': 'Permission'},
+        'auth.permission': {
+            'Meta': {'object_name': 'Permission', 'unique_together': "(('content_type', 'codename'),)", 'ordering': "('content_type__app_label', 'content_type__model', 'codename')"},
             'codename': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
-            'content_type': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['contenttypes.ContentType']"}),
-            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'content_type': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['contenttypes.ContentType']"}),
+            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'name': ('django.db.models.fields.CharField', [], {'max_length': '50'})
         },
-        u'contenttypes.contenttype': {
-            'Meta': {'ordering': "('name',)", 'unique_together': "(('app_label', 'model'),)", 'object_name': 'ContentType', 'db_table': "'django_content_type'"},
+        'contenttypes.contenttype': {
+            'Meta': {'object_name': 'ContentType', 'unique_together': "(('app_label', 'model'),)", 'db_table': "'django_content_type'", 'ordering': "('name',)"},
             'app_label': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
-            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'model': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
             'name': ('django.db.models.fields.CharField', [], {'max_length': '100'})
         },
-        'filer.file': {
-            'Meta': {'object_name': 'File'},
-            '_file_size': ('django.db.models.fields.IntegerField', [], {'null': 'True', 'blank': 'True'}),
-            'description': ('django.db.models.fields.TextField', [], {'null': 'True', 'blank': 'True'}),
-            'file': ('django.db.models.fields.files.FileField', [], {'max_length': '255', 'null': 'True', 'blank': 'True'}),
-            'folder': ('django.db.models.fields.related.ForeignKey', [], {'blank': 'True', 'related_name': "'all_files'", 'null': 'True', 'to': "orm['filer.Folder']"}),
-            'has_all_mandatory_data': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
-            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'is_public': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
-            'modified_at': ('django.db.models.fields.DateTimeField', [], {'auto_now': 'True', 'blank': 'True'}),
-            'name': ('django.db.models.fields.CharField', [], {'default': "''", 'max_length': '255', 'blank': 'True'}),
-            'original_filename': ('django.db.models.fields.CharField', [], {'max_length': '255', 'null': 'True', 'blank': 'True'}),
-            'owner': ('django.db.models.fields.related.ForeignKey', [], {'blank': 'True', 'related_name': "'owned_files'", 'null': 'True', 'to': u"orm['profiles.User']"}),
-            'polymorphic_ctype': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'polymorphic_filer.file_set'", 'null': 'True', 'to': u"orm['contenttypes.ContentType']"}),
-            'sha1': ('django.db.models.fields.CharField', [], {'default': "''", 'max_length': '40', 'blank': 'True'}),
-            'uploaded_at': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'blank': 'True'})
-        },
-        'filer.folder': {
-            'Meta': {'ordering': "('name',)", 'unique_together': "(('parent', 'name'),)", 'object_name': 'Folder'},
-            'created_at': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'blank': 'True'}),
-            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'level': ('django.db.models.fields.PositiveIntegerField', [], {'db_index': 'True'}),
-            'lft': ('django.db.models.fields.PositiveIntegerField', [], {'db_index': 'True'}),
-            'modified_at': ('django.db.models.fields.DateTimeField', [], {'auto_now': 'True', 'blank': 'True'}),
-            'name': ('django.db.models.fields.CharField', [], {'max_length': '255'}),
-            'owner': ('django.db.models.fields.related.ForeignKey', [], {'blank': 'True', 'related_name': "'filer_owned_folders'", 'null': 'True', 'to': u"orm['profiles.User']"}),
-            'parent': ('django.db.models.fields.related.ForeignKey', [], {'blank': 'True', 'related_name': "'children'", 'null': 'True', 'to': "orm['filer.Folder']"}),
-            'rght': ('django.db.models.fields.PositiveIntegerField', [], {'db_index': 'True'}),
-            'tree_id': ('django.db.models.fields.PositiveIntegerField', [], {'db_index': 'True'}),
-            'uploaded_at': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'blank': 'True'})
-        },
-        u'profiles.user': {
+        'profiles.user': {
             'Meta': {'object_name': 'User'},
             'bio': ('django.db.models.fields.TextField', [], {'null': 'True', 'blank': 'True'}),
+            'charisma': ('django.db.models.fields.PositiveIntegerField', [], {'default': '1'}),
+            'constitution': ('django.db.models.fields.PositiveIntegerField', [], {'default': '1'}),
             'date_joined': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime.now'}),
+            'dexterity': ('django.db.models.fields.PositiveIntegerField', [], {'default': '1'}),
             'email': ('django.db.models.fields.EmailField', [], {'max_length': '75', 'blank': 'True'}),
             'first_name': ('django.db.models.fields.CharField', [], {'max_length': '30', 'blank': 'True'}),
-            'groups': ('django.db.models.fields.related.ManyToManyField', [], {'symmetrical': 'False', 'related_name': "u'user_set'", 'blank': 'True', 'to': u"orm['auth.Group']"}),
-            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'groups': ('django.db.models.fields.related.ManyToManyField', [], {'symmetrical': 'False', 'to': "orm['auth.Group']", 'blank': 'True', 'related_name': "'user_set'"}),
+            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'intelligence': ('django.db.models.fields.PositiveIntegerField', [], {'default': '1'}),
             'is_active': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
             'is_staff': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
             'is_superuser': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
             'last_login': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime.now'}),
             'last_name': ('django.db.models.fields.CharField', [], {'max_length': '30', 'blank': 'True'}),
             'password': ('django.db.models.fields.CharField', [], {'max_length': '128'}),
-            'user_permissions': ('django.db.models.fields.related.ManyToManyField', [], {'symmetrical': 'False', 'related_name': "u'user_set'", 'blank': 'True', 'to': u"orm['auth.Permission']"}),
-            'username': ('django.db.models.fields.CharField', [], {'unique': 'True', 'max_length': '30'})
+            'strength': ('django.db.models.fields.PositiveIntegerField', [], {'default': '1'}),
+            'user_permissions': ('django.db.models.fields.related.ManyToManyField', [], {'symmetrical': 'False', 'to': "orm['auth.Permission']", 'blank': 'True', 'related_name': "'user_set'"}),
+            'username': ('django.db.models.fields.CharField', [], {'unique': 'True', 'max_length': '30'}),
+            'wisdom': ('django.db.models.fields.PositiveIntegerField', [], {'default': '1'})
         },
-        u'projects.project': {
+        'projects.budget': {
+            'Meta': {'object_name': 'Budget'},
+            'about': ('django.db.models.fields.TextField', [], {}),
+            'badget': ('django.db.models.fields.CharField', [], {'max_length': '128'}),
+            'badget_file': ('django.db.models.fields.files.FileField', [], {'blank': 'True', 'null': 'True', 'max_length': '100'}),
+            'branding_design': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
+            'branding_design_about': ('django.db.models.fields.TextField', [], {'blank': 'True', 'default': "''"}),
+            'company': ('django.db.models.fields.CharField', [], {'blank': 'True', 'null': 'True', 'max_length': '128'}),
+            'email': ('django.db.models.fields.EmailField', [], {'max_length': '75'}),
+            'hosting': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
+            'hosting_assistance': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
+            'hosting_quotes': ('django.db.models.fields.CharField', [], {'blank': 'True', 'null': 'True', 'max_length': '128'}),
+            'hosting_type': ('django.db.models.fields.IntegerField', [], {'blank': 'True', 'default': '3'}),
+            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'name': ('django.db.models.fields.CharField', [], {'max_length': '128'}),
+            'other_type': ('django.db.models.fields.CharField', [], {'blank': 'True', 'null': 'True', 'max_length': '128'}),
+            'responsive_web_design': ('django.db.models.fields.NullBooleanField', [], {'null': 'True', 'blank': 'True'}),
+            'stage': ('django.db.models.fields.IntegerField', [], {'default': '0'}),
+            'title': ('django.db.models.fields.CharField', [], {'max_length': '128'}),
+            'type': ('django.db.models.fields.IntegerField', [], {'default': '1'}),
+            'web_design': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
+            'web_design_stage': ('django.db.models.fields.IntegerField', [], {'blank': 'True', 'default': '0'})
+        },
+        'projects.project': {
             'Meta': {'object_name': 'Project'},
-            'author': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['profiles.User']"}),
+            'author': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['profiles.User']"}),
             'content': ('django.db.models.fields.TextField', [], {'null': 'True', 'blank': 'True'}),
-            'created_at': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime(2014, 2, 13, 0, 0)'}),
-            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'outstanding_image': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['filer.File']", 'null': 'True', 'blank': 'True'}),
+            'created_at': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime(2014, 6, 28, 0, 0)'}),
+            'description': ('django.db.models.fields.TextField', [], {'null': 'True'}),
+            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'outstanding_image': ('django.db.models.fields.files.ImageField', [], {'blank': 'True', 'null': 'True', 'max_length': '100'}),
             'scheduled_at': ('django.db.models.fields.DateTimeField', [], {'null': 'True', 'blank': 'True'}),
             'slug': ('django.db.models.fields.SlugField', [], {'unique': 'True', 'max_length': '50', 'blank': 'True'}),
             'status': ('django.db.models.fields.PositiveIntegerField', [], {'default': '0'}),
-            'tags': ('django.db.models.fields.related.ManyToManyField', [], {'related_name': "'projects'", 'symmetrical': 'False', 'to': u"orm['tags.Tag']"}),
+            'tags': ('django.db.models.fields.related.ManyToManyField', [], {'symmetrical': 'False', 'to': "orm['tags.Tag']", 'related_name': "'projects'"}),
+            'thumbnail_image': ('django.db.models.fields.files.ImageField', [], {'blank': 'True', 'null': 'True', 'max_length': '100'}),
             'title': ('django.db.models.fields.TextField', [], {})
         },
-        u'tags.tag': {
+        'tags.tag': {
             'Meta': {'object_name': 'Tag'},
-            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'name': ('django.db.models.fields.CharField', [], {'max_length': '128'}),
             'slug': ('django.db.models.fields.SlugField', [], {'unique': 'True', 'max_length': '50', 'blank': 'True'})
         }

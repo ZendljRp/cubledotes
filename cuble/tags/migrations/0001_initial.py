@@ -9,25 +9,25 @@ class Migration(SchemaMigration):
 
     def forwards(self, orm):
         # Adding model 'Tag'
-        db.create_table(u'tags_tag', (
-            (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
+        db.create_table('tags_tag', (
+            ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
             ('name', self.gf('django.db.models.fields.CharField')(max_length=128)),
-            ('slug', self.gf('django.db.models.fields.SlugField')(unique=True, max_length=50, blank=True)),
+            ('slug', self.gf('django.db.models.fields.SlugField')(max_length=50, unique=True, blank=True)),
         ))
-        db.send_create_signal(u'tags', ['Tag'])
+        db.send_create_signal('tags', ['Tag'])
 
 
     def backwards(self, orm):
         # Deleting model 'Tag'
-        db.delete_table(u'tags_tag')
+        db.delete_table('tags_tag')
 
 
     models = {
-        u'tags.tag': {
+        'tags.tag': {
             'Meta': {'object_name': 'Tag'},
-            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'name': ('django.db.models.fields.CharField', [], {'max_length': '128'}),
-            'slug': ('django.db.models.fields.SlugField', [], {'unique': 'True', 'max_length': '50', 'blank': 'True'})
+            'slug': ('django.db.models.fields.SlugField', [], {'max_length': '50', 'unique': 'True', 'blank': 'True'})
         }
     }
 

@@ -38,7 +38,8 @@ def name_to_path(path):
     def name(instance, filename):
         """  Generates an unique name for an uploaded file. """
         ext = filename.split('.')[-1]
-        file_name = hashlib.sha256(unicode(time.time()) + u'--' + unicode(random.random()))
+        name_to_hash = "{}--{}".format(time.time(), random.random())
+        file_name = hashlib.sha256(name_to_hash.encode('utf-8'))
         file_format = "{}.{}".format(file_name.hexdigest(), ext)
         return os.path.join(path, file_format)
     return name

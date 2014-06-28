@@ -28,9 +28,9 @@ from __future__ import unicode_literals
 from django.db import models
 from django.utils.text import slugify
 from django.utils.translation import ugettext as _
-from filer.fields.file import FilerFileField
-from core.files import readable_name_to_path
+from easy_thumbnails.fields import ThumbnailerImageField
 
+from core.files import readable_name_to_path
 from core.models import AbstractArticle
 from tags.models import Tag
 
@@ -42,7 +42,7 @@ class Project(AbstractArticle):
     description = models.TextField(null=True)
     tags = models.ManyToManyField(Tag, related_name="projects")
 
-    thumbnail_image = FilerFileField(related_name="projects", null=True, blank=True)
+    thumbnail_image = ThumbnailerImageField(upload_to=readable_name_to_path('images'), null=True, blank=True)
 
     def __unicode__(self):
         return self.title

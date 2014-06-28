@@ -29,7 +29,8 @@ from django.conf import settings
 from django.utils import timezone
 from django.utils.translation import ugettext as _
 from django.db import models
-from filer.fields.file import FilerFileField
+from easy_thumbnails.fields import ThumbnailerImageField
+from core.files import readable_name_to_path
 
 from core.managers import ArticlesManager
 
@@ -54,7 +55,7 @@ class AbstractArticle(models.Model):
     created_at = models.DateTimeField(default=timezone.now())
     scheduled_at = models.DateTimeField(null=True, blank=True)
 
-    outstanding_image = FilerFileField(null=True, blank=True)
+    outstanding_image = ThumbnailerImageField(upload_to=readable_name_to_path('images'), null=True, blank=True)
 
     objects = ArticlesManager()
 
