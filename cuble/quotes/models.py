@@ -24,7 +24,9 @@ THE SOFTWARE.
 
 """
 from django.db import models
+from easy_thumbnails.fields import ThumbnailerImageField
 from filer.fields.file import FilerFileField
+from core.files import readable_name_to_path
 
 
 class Quote(models.Model):
@@ -32,5 +34,5 @@ class Quote(models.Model):
     """
 
     author = models.CharField(max_length=256)
-    picture = FilerFileField(null=True, blank=True)
+    picture = ThumbnailerImageField(upload_to=readable_name_to_path('images'), null=True, blank=True)
     text = models.TextField()

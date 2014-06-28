@@ -51,15 +51,15 @@ class PostModelTests(TestCase):
     def test_create_post(self):
         prev_posts = Post.objects.count()
         self._create_post()
-        self.assertEquals(prev_posts + 1, Post.objects.count())
+        self.assertEqual(prev_posts + 1, Post.objects.count())
 
     def test_create_slug(self):
         post = mommy.make('blog.Post', author=self.user)
         post.save()
-        self.assertEquals(post.slug, slugify(post.title))
+        self.assertEqual(post.slug, slugify(post.title))
 
     def test_more(self):
         original_summary = "part1"
         post = self._create_post("{}<!--more-->more".format(original_summary))
         summary = post.summary()
-        self.assertEquals(summary, '{}<p><a href="/blog/title/">Seguir leyendo...</a></p>'.format(original_summary))
+        self.assertEqual(summary, '{}<p><a href="/blog/title/">Seguir leyendo...</a></p>'.format(original_summary))

@@ -239,8 +239,6 @@ THIRD_PARTY_APPS = (
     'django_extensions',
     'easy_thumbnails',
     'django_gravatar',
-    'mptt',
-    'filer',
 )
 
 # Apps specific for this project go here.

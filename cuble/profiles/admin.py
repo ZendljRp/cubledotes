@@ -24,11 +24,12 @@ THE SOFTWARE.
 
 """
 from __future__ import unicode_literals
+
 from django import forms
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
-from django.utils.translation import ugettext, ugettext_lazy as _
+from django.utils.translation import ugettext_lazy as _
 
 from profiles.models import User
 

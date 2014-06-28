@@ -25,6 +25,7 @@ THE SOFTWARE.
 from __future__ import unicode_literals
 
 from django.test import TestCase
+from django.utils.encoding import force_text
 from django.utils.text import slugify
 from model_mommy import mommy
 
@@ -42,5 +43,5 @@ class ProjectModelTests(TestCase):
     def test_create_slug(self):
         project = mommy.make('projects.Project', author=self.user)
         project.save()
-        self.assertEquals(project.slug, slugify(project.title))
-        self.assertEquals(unicode(project), project.title)
+        self.assertEqual(project.slug, slugify(project.title))
+        self.assertEqual(force_text(project), project.title)
