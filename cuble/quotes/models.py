@@ -25,7 +25,7 @@ THE SOFTWARE.
 """
 from django.db import models
 from easy_thumbnails.fields import ThumbnailerImageField
-from filer.fields.file import FilerFileField
+
 from core.files import readable_name_to_path
 
 
