@@ -31,7 +31,7 @@ from core.files import readable_name_to_path, name_to_path
 
 class Dummy(object):
     def __init__(self):
-        pass
+        self.name = "foo"
 
 
 class FilesTests(TestCase):
@@ -47,6 +47,30 @@ class FilesTests(TestCase):
         self.assertTrue(callable(func))
         result = func(Dummy(), 'test.png')
         self.assertEqual(result, 'test/test.png')
+
+    def test_readable_name_to_path_populate(self):
+        """
+
+        @return:
+        """
+        func = readable_name_to_path('test', populate_from='name')
+        self.assertTrue(callable(func))
+        result = func(Dummy(), 'test.png')
+        self.assertEqual(result, 'test/foo.png')
+
+    def test_readable_name_to_path_populate_error(self):
+        """
+
+        @return:
+        """
+        exception = False
+        try:
+            func = readable_name_to_path('test', populate_from='foo')
+            self.assertTrue(callable(func))
+            func(Dummy(), 'test.png')
+        except AttributeError:
+            exception = True
+        self.assertTrue(exception)
 
     def test_name_to_path(self):
         """
