@@ -26,6 +26,7 @@ THE SOFTWARE.
 from __future__ import unicode_literals
 
 from django.db import models
+from django.utils.encoding import python_2_unicode_compatible
 from django.utils.text import slugify
 from django.utils.translation import ugettext as _
 from easy_thumbnails.fields import ThumbnailerImageField
@@ -35,6 +36,7 @@ from core.models import AbstractArticle
 from tags.models import Tag
 
 
+@python_2_unicode_compatible
 class Project(AbstractArticle):
     """
     Post for blogging.
@@ -44,7 +46,7 @@ class Project(AbstractArticle):
 
     thumbnail_image = ThumbnailerImageField(upload_to=readable_name_to_path('images'), null=True, blank=True)
 
-    def __unicode__(self):
+    def __str__(self):
         return self.title
 
     def thumbnail(self):

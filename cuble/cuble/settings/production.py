@@ -57,7 +57,7 @@ EMAIL_PORT = 587
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#databases
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
+        'ENGINE': 'mysql.connector.django',
         'NAME': get_env_setting('DB_NAME'),
         'USER': get_env_setting('DB_USER'),
         'PASSWORD': get_env_setting('DB_PASSWORD'),
@@ -81,3 +81,9 @@ DATABASES = {
 # STATICFILES_STORAGE = 'core.s3utils.StaticRootS3BotoStorage'
 # STATIC_URL = "//{}.s3.amazonaws.com/static/".format(AWS_STORAGE_BUCKET_NAME)
 ########### END STORAGES CONFIGURATION
+
+########## SOUTH CONFIGURATION
+SOUTH_DATABASE_ADAPTERS = {
+    'default': 'south.db.mysql'
+}
+########## END SOUTH CONFIGURATION

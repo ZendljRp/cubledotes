@@ -304,12 +304,13 @@ SUIT_CONFIG = {
     'ADMIN_NAME': u'Cuble Admin',
     'MENU_ICONS': {
         'sites': 'icon-leaf',
-        'auth': 'icon-user',
+        'auth': 'icon-lock',
         'blog': 'icon-pencil',
         'projects': 'icon-th-large',
         'profiles': 'icon-user',
         'tags': 'icon-tag',
         'filer': 'icon-picture',
+        'quotes': 'icon-comment',
     }
 }
 ########## END SUIT CONFIGURATION

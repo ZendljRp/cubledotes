@@ -27,20 +27,21 @@ from __future__ import unicode_literals
 
 from django.core.urlresolvers import reverse
 from django.db import models
+from django.utils.encoding import python_2_unicode_compatible
 from django.utils.text import slugify
 from django.utils.translation import ugettext as _
 
 from core.models import AbstractArticle
 from tags.models import Tag
 
-
+@python_2_unicode_compatible
 class Post(AbstractArticle):
     """
     Post for blogging.
     """
     tags = models.ManyToManyField(Tag, related_name="posts")
 
-    def __unicode__(self):
+    def __str__(self):
         return self.title
 
     def _read_more_tag(self):
