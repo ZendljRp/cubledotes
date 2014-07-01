@@ -370,8 +370,7 @@ PIPELINE_JS = {
 }
 
 PIPELINE_LESS_ARGUMENTS = '-x --yui-compress'
-PIPELINE_JS_COMPRESSOR = 'pipeline.compressors.yuglify.YuglifyCompressor'
-PIPELINE_YUGLIFY_JS_ARGUMENTS = '--terminal'
+PIPELINE_JS_COMPRESSOR = 'pipeline.compressors.jsmin.JSMinCompressor'
 
 STATICFILES_STORAGE = 'pipeline.storage.PipelineStorage'
 ########## END PIPELINE CONFIGURATION
