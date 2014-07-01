@@ -57,7 +57,7 @@ EMAIL_PORT = 587
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#databases
 DATABASES = {
     'default': {
-        'ENGINE': 'mysql.connector.django',
+        'ENGINE': 'django.db.backends.mysql',
         'NAME': get_env_setting('DB_NAME'),
         'USER': get_env_setting('DB_USER'),
         'PASSWORD': get_env_setting('DB_PASSWORD'),
@@ -83,7 +83,7 @@ DATABASES = {
 ########### END STORAGES CONFIGURATION
 
 ########## SOUTH CONFIGURATION
-SOUTH_DATABASE_ADAPTERS = {
-    'default': 'south.db.mysql'
-}
+# SOUTH_DATABASE_ADAPTERS = {
+#     'default': 'south.db.mysql'
+# }
 ########## END SOUTH CONFIGURATION
