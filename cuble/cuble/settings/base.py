@@ -369,7 +369,9 @@ PIPELINE_JS = {
     }
 }
 
-PIPELINE_LESS_ARGUMENTS = '-x --yui-compress'
+PIPELINE_LESS_ARGUMENTS = '-x'
+
+PIPELINE_CSS_COMPRESSOR = None
 PIPELINE_JS_COMPRESSOR = 'pipeline.compressors.jsmin.JSMinCompressor'
 
 STATICFILES_STORAGE = 'pipeline.storage.PipelineStorage'
