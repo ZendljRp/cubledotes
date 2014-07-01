@@ -42,7 +42,7 @@ class Project(AbstractArticle):
     Post for blogging.
     """
     description = models.TextField(null=True)
-    tags = models.ManyToManyField(Tag, related_name="projects")
+    tags = models.ManyToManyField(Tag, related_name="projects", blank=True)
 
     thumbnail_image = ThumbnailerImageField(upload_to=readable_name_to_path('images'), null=True, blank=True)
 
