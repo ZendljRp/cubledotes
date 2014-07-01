@@ -372,7 +372,7 @@ PIPELINE_JS = {
 PIPELINE_LESS_ARGUMENTS = '-x'
 
 PIPELINE_CSS_COMPRESSOR = None
-PIPELINE_JS_COMPRESSOR = 'pipeline.compressors.jsmin.JSMinCompressor'
+PIPELINE_JS_COMPRESSOR = None
 
 STATICFILES_STORAGE = 'pipeline.storage.PipelineStorage'
 ########## END PIPELINE CONFIGURATION
