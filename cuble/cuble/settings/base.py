@@ -304,12 +304,13 @@ SUIT_CONFIG = {
     'ADMIN_NAME': u'Cuble Admin',
     'MENU_ICONS': {
         'sites': 'icon-leaf',
-        'auth': 'icon-user',
+        'auth': 'icon-lock',
         'blog': 'icon-pencil',
         'projects': 'icon-th-large',
         'profiles': 'icon-user',
         'tags': 'icon-tag',
         'filer': 'icon-picture',
+        'quotes': 'icon-comment',
     }
 }
 ########## END SUIT CONFIGURATION
@@ -368,9 +369,10 @@ PIPELINE_JS = {
     }
 }
 
-PIPELINE_LESS_ARGUMENTS = '-x --yui-compress'
-PIPELINE_JS_COMPRESSOR = 'pipeline.compressors.yuglify.YuglifyCompressor'
-PIPELINE_YUGLIFY_JS_ARGUMENTS = '--terminal'
+PIPELINE_LESS_ARGUMENTS = '-x'
+
+PIPELINE_CSS_COMPRESSOR = None
+PIPELINE_JS_COMPRESSOR = None
 
 STATICFILES_STORAGE = 'pipeline.storage.PipelineStorage'
 ########## END PIPELINE CONFIGURATION
