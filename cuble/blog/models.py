@@ -39,7 +39,7 @@ class Post(AbstractArticle):
     """
     Post for blogging.
     """
-    tags = models.ManyToManyField(Tag, related_name="posts")
+    tags = models.ManyToManyField(Tag, related_name="posts", blank=True)
 
     def __str__(self):
         return self.title
