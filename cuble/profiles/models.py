@@ -24,6 +24,7 @@ THE SOFTWARE.
 
 """
 from __future__ import unicode_literals
+from django.conf import settings
 from django.db import models
 from django.utils.translation import ugettext as _
 from django.contrib.auth.models import AbstractUser
@@ -35,10 +36,44 @@ class User(AbstractUser):
     """
     bio = models.TextField(_("Description"), null=True, blank=True)
 
-    # Skills
-    strength = models.PositiveIntegerField(verbose_name=_("Programming Python/Django"), default=1)
-    dexterity = models.PositiveIntegerField(verbose_name=_("Programming Javascript/HTML5/CSS3"), default=1)
-    constitution = models.PositiveIntegerField(verbose_name=_("Server Architecture"), default=1)
-    intelligence = models.PositiveIntegerField(verbose_name=_("Software Design and Theory"), default=1)
-    wisdom = models.PositiveIntegerField(verbose_name=_("Data Bases"), default=1)
-    charisma = models.PositiveIntegerField(verbose_name=_("Management"), default=1)
+    # SKILLS
+    MAX_SKILL = 7
+
+    DEVELOPERS_SKILLS_FIELDS = ['strength', 'dexterity', 'constitution', 'intelligence', 'wisdom', 'charisma']
+    DESIGNER_SKILLS_FIELDS = []
+    MANAGER_SKILLS_FIELDS = []
+
+    strength = models.PositiveIntegerField(verbose_name=_('Strength'), help_text=_("Programming Python/Django"), default=1)
+    dexterity = models.PositiveIntegerField(verbose_name=_('Dexterity'), help_text=_("Programming Javascript/HTML5/CSS3"), default=1)
+    constitution = models.PositiveIntegerField(verbose_name=_('Constitution'), help_text=_("Server Architecture"), default=1)
+    intelligence = models.PositiveIntegerField(verbose_name=_('Intelligence'), help_text=_("Software Design and Theory"), default=1)
+    wisdom = models.PositiveIntegerField(verbose_name=_('Wisdom'), help_text=_("Data Bases"), default=1)
+    charisma = models.PositiveIntegerField(verbose_name=_('Charisma'), help_text=_("Management"), default=1)
+
+    def skills(self):
+        """
+
+        :return:
+        """
+        skills = list()
+        fields = self.DEVELOPERS_SKILLS_FIELDS
+        for field_name in fields:
+            skills.append(
+                (
+                    self._meta.get_field_by_name(field_name)[0].verbose_name,
+                    self._meta.get_field_by_name(field_name)[0].help_text,
+                    getattr(self, field_name) / self.MAX_SKILL * 100.0,
+                    getattr(self, field_name)
+                )
+            )
+        return skills
+
+
+class Link(models.Model):
+    """
+    Generic links for users.
+    """
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='links')
+    url = models.URLField()
+    icon = models.CharField(max_length=128)
+    title = models.CharField(max_length=128, null=True, blank=True)

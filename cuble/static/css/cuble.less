@@ -111,6 +111,10 @@ ul.list-special {
   &-grey {
     padding-top: 42px;
     padding-bottom: 38px;
+    @media (max-width: @screen-md-min) {
+      padding-top: 0px;
+      padding-bottom: 15px;
+    }
     margin: 0;
     background-color: @cuble_grey_light;
   }
@@ -130,7 +134,7 @@ ul.list-special {
 .warp-lead {
   @media (max-width: @screen-md-min) {
     margin-top: 15px;
-    margin-bottom: 15px;
+    margin-bottom: 0px;
   }
 }
 
@@ -295,4 +299,18 @@ article h3:first-child {
     column-count: 3;
     column-gap: 30px;
   }
+}
+
+// Team
+.profile-token {
+  .progress {
+    margin-bottom: 5px;
+  }
+  h3 {
+    margin-top: 0px;
+  }
+  i {
+    font-size: 32px;
+  }
+  margin-bottom: 20px;
 }

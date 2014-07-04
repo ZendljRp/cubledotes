@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load i18n %}
+{% load l10n %}
 {% load static %}
 {% load gravatar %}
 
@@ -10,20 +11,47 @@
 {% block main %}
     <div class="warp-white">
         <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    {% block main_content %}
-                        <div class="row">
-                            {% for member in team %}
-                                <div class="col-md-3">
-                                    <p><img src="{% gravatar_url member.email 292 %}"  class="img-responsive" /></p>
+            {% block main_content %}
+                <div class="row">
+                    {% for member in team %}
+                        <div class="profile-token col-md-4 col-sm-6 col-xs-12">
+                            <div class="row">
+                                <div class="col-xs-4">
+                                    <p><img src="{% gravatar_url member.email 150 %}"  class="img-responsive" /></p>
+                                </div>
+                                <div class="col-xs-8">
                                     <h3>{{ member.get_full_name }}</h3>
+                                    {% for link in member.links.all %}
+                                        <a href="{{ link.url }}" target="_blank"><i class="fa {{ link.icon }}" data-toggle="tooltip" title="{{ link.title }}" data-placement="top"></i></a>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <p>{{ member.bio }}</p>
+                                </div>
+                            </div>
+                            <h4>{% trans "Awesome skills" %}</h4>
+                            {% for name, real_name, percentage, value in member.skills %}
+                                <div class="row">
+                                    <div class="col-xs-4">
+                                        <strong data-toggle="tooltip" title="{{ real_name }}" data-placement="top">{{ name }}</strong>
+                                    </div>
+                                    <div class="col-xs-8">
+                                        {% localize off %}
+                                            <div class="progress" data-toggle="tooltip" title="{{ real_name }}">
+                                                <div class="progress-bar" role="progressbar" aria-valuenow="{{ percentage }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ percentage }}%;">
+                                                    <span class="sr-only">{{ value }}</span>
+                                                </div>
+                                            </div>
+                                        {% endlocalize %}
+                                    </div>
                                 </div>
                             {% endfor %}
                         </div>
-                    {% endblock main_content %}
+                    {% endfor %}
                 </div>
-            </div>
+            {% endblock main_content %}
         </div>
     </div>
 {% endblock main %}

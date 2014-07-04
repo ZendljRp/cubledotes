@@ -31,7 +31,12 @@ from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from django.utils.translation import ugettext_lazy as _
 
-from profiles.models import User
+from profiles.models import User, Link
+
+
+class LinkInline(admin.TabularInline):
+    model = Link
+    extra = 1
 
 
 class CustomUserCreationForm(UserCreationForm):
@@ -61,12 +66,17 @@ class CustomUserAdmin(UserAdmin):
 
     list_display = ['id', 'email', 'first_name', 'last_name']
 
+    inlines = (LinkInline, )
+
     form = CustomUserChangeForm
     add_form = CustomUserCreationForm
 
     fieldsets = (
         (None, {'fields': ('username', 'password')}),
         (_('Personal info'), {'fields': ('first_name', 'last_name', 'email', 'bio')}),
+        (_('Skills'), {
+            'fields': ('strength', 'dexterity', 'constitution', 'intelligence', 'wisdom', 'charisma')
+        }),
         (_('Permissions'), {'fields': ('is_active', 'is_staff', 'is_superuser',
                                        'groups', 'user_permissions')}),
         (_('Important dates'), {'fields': ('last_login', 'date_joined')}),

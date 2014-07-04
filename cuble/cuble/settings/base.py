@@ -350,7 +350,7 @@ PIPELINE_JS = {
     'vendor': {
         'source_filenames': (
             'vendor/quovolver/jquery.quovolver.js',
-            'vendor/bootstrap/dist/js/bootstrap.js',
+            'vendor/bootstrap/dist/js/bootstrap.min.js',
             'vendor/angular/angular.js',
         ),
         'output_filename': 'js/vendor.js',
