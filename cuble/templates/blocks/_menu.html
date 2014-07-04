@@ -3,7 +3,7 @@
 <nav class="menu">
     <ul>
         <li><a href="{% url "landing" %}" class="{% active '^/$' %}">{% trans "Home" %}</a></li>
-        <li><a href="{% url "services" %}" class="{% active 'services' %}">{% trans "Services" %}</a></li>
+{#        <li><a href="{% url "services" %}" class="{% active 'services' %}">{% trans "Services" %}</a></li>#}
         <li><a href="{% url "projects" %}" class="{% active 'projects' %}">{% trans "Work" %}</a></li>
         <li><a href="{% url "blog" %}" class="{% active 'blog' %}">{% trans "Blog" %}</a></li>
         <li><a href="{% url "profiles:team" %}" class="{% active 'team' %}">{% trans "Team" %}</a></li>
