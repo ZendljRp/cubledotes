@@ -199,7 +199,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.locale.LocaleMiddleware',
-    'django.middleware.doc.XViewMiddleware',
+    'django.contrib.admindocs.middleware.XViewMiddleware',
     'django.middleware.common.CommonMiddleware',
 
     # Blog
@@ -235,7 +235,7 @@ DJANGO_APPS = (
 )
 
 THIRD_PARTY_APPS = (
-    'south',
+    # 'south',
     'django_extensions',
     'easy_thumbnails',
     'django_gravatar',
@@ -389,3 +389,8 @@ INSTALLED_APPS += (
     'floppyforms',
 )
 ########## END FLOPPYFORMS CONFIGURATION
+
+
+########## TEST CONFIGURATION
+TEST_RUNNER = 'django.test.runner.DiscoverRunner'
+########## END TEST CONFIGURATION

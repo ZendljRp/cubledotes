@@ -38,6 +38,7 @@ class CustomUserCreationForm(UserCreationForm):
 
     class Meta:
         model = User
+        fields = ("username",)
 
     def clean_username(self):
         # Since User.username is unique, this check is redundant,
@@ -54,6 +55,7 @@ class CustomUserChangeForm(UserChangeForm):
 
     class Meta:
         model = User
+        fields = '__all__'
 
 
 class CustomUserAdmin(UserAdmin):

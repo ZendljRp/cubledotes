@@ -31,7 +31,7 @@ from django.utils.text import slugify
 from django.utils.translation import ugettext as _
 from easy_thumbnails.fields import ThumbnailerImageField
 
-from core.files import readable_name_to_path
+from core.files import UploadToDir
 from core.models import AbstractArticle
 from tags.models import Tag
 
@@ -44,7 +44,7 @@ class Project(AbstractArticle):
     description = models.TextField(null=True)
     tags = models.ManyToManyField(Tag, related_name="projects")
 
-    thumbnail_image = ThumbnailerImageField(upload_to=readable_name_to_path('images'), null=True, blank=True)
+    thumbnail_image = ThumbnailerImageField(upload_to=UploadToDir('images'), null=True, blank=True)
 
     def __str__(self):
         return self.title
@@ -188,7 +188,7 @@ class Budget(models.Model):
     )
     badget_file = models.FileField(
         verbose_name=_("Si dispones de un briefing del proyecto no dudes en enviárlo"),
-        upload_to=readable_name_to_path('badgets'),
+        upload_to=UploadToDir('badgets'),
         null=True,
         blank=True
     )
