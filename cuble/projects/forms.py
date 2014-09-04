@@ -41,6 +41,7 @@ class BudgetForm(ModelForm):
 
     class Meta:
         model = Budget
+        fields = '__all__'
         widgets = {
             "stage": floppyforms.widgets.RadioSelect(),
             "type": floppyforms.widgets.RadioSelect(),
