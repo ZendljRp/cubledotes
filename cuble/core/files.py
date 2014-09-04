@@ -28,6 +28,7 @@ import hashlib
 import time
 import random
 import os
+from django.utils.deconstruct import deconstructible
 from django.utils.text import slugify
 
 
@@ -45,23 +46,24 @@ def name_to_path(path):
     return name
 
 
-def readable_name_to_path(path, populate_from=None):
-    """
-    Generates a function to give  to ``upload_to`` parameter in
+@deconstructible
+class UploadToDir(object):
+    """Generates a function to give  to ``upload_to`` parameter in
     models.Fields, that generates an name for uploaded files based on ``populate_from``
     attribute.
     """
 
-    def name(instance, filename):
-        """
-        Generates an name for an uploaded file.
-        """
-        if populate_from is not None and not hasattr(instance, populate_from):
-            raise AttributeError("Instance hasn't {} attribute".format(populate_from))
+    def __init__(self, path, populate_from=None):
+        self.path = path
+        self.populate_from = populate_from
+
+    def __call__(self, instance, filename):
+        """Generates an name for an uploaded file."""
+        if self.populate_from is not None and not hasattr(instance, self.populate_from):
+            raise AttributeError("Instance hasn't {} attribute".format(self.populate_from))
         ext = filename.split('.')[-1]
         readable_name = slugify(filename.split('.')[0])
-        if populate_from:
-            readable_name = slugify(getattr(instance, populate_from))
+        if self.populate_from:
+            readable_name = slugify(getattr(instance, self.populate_from))
         file_name = "{}.{}".format(readable_name, ext)
-        return os.path.join(path, file_name)
-    return name
+        return os.path.join(self.path, file_name)
