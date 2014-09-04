@@ -26,7 +26,7 @@ from __future__ import unicode_literals
 
 from django.test import TestCase
 
-from core.files import readable_name_to_path, name_to_path
+from core.files import UploadToDir, name_to_path
 
 
 class Dummy(object):
@@ -43,7 +43,7 @@ class FilesTests(TestCase):
 
         @return:
         """
-        func = readable_name_to_path('test')
+        func = UploadToDir('test')
         self.assertTrue(callable(func))
         result = func(Dummy(), 'test.png')
         self.assertEqual(result, 'test/test.png')
@@ -53,7 +53,7 @@ class FilesTests(TestCase):
 
         @return:
         """
-        func = readable_name_to_path('test', populate_from='name')
+        func = UploadToDir('test', populate_from='name')
         self.assertTrue(callable(func))
         result = func(Dummy(), 'test.png')
         self.assertEqual(result, 'test/foo.png')
@@ -65,7 +65,7 @@ class FilesTests(TestCase):
         """
         exception = False
         try:
-            func = readable_name_to_path('test', populate_from='foo')
+            func = UploadToDir('test', populate_from='foo')
             self.assertTrue(callable(func))
             func(Dummy(), 'test.png')
         except AttributeError:
